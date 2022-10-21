@@ -1,0 +1,21 @@
+[package]
+name = "morax"
+version = "1.0.0"
+authors = ["hazae41 <hazae41@proton.me>"]
+edition = "2021"
+
+description = "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing."
+repository = "https://github.com/hazae41/morax-wasm"
+license = "Unlicense"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+lto = true
+debug = false
+opt-level = "z"
+
+[dependencies]
+wasm-bindgen = { version = "0.2.83", default-features = false, features= ["std"] }
+sha1 = { version = "0.10.5", default-features = false }
