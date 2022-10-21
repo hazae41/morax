@@ -7,11 +7,11 @@ a Rust implementations of SHA-1 hashing.
 
 This WebAssembly module is useful when you want to use SHA-1 incrementially, as WebCrypto doesn't support incremental hashing, and want good performances.
 
-|  | Performances | Incremental hashing |  |
-|---|---|---|---|
-| Morax | ⭐️⭐️⭐️⭐️    | ✅ |  |
-| WebCrypto | ⭐️⭐️⭐️⭐️⭐️     | ❌ |  |
-| JavaScript | ⭐️⭐️⭐️  | ✅ |  |
+|  | Performances | Incremental hashing |
+|---|---|---|
+| Morax | ⭐️⭐️⭐️⭐️    | ✅ |
+| WebCrypto | ⭐️⭐️⭐️⭐️⭐️     | ❌ |
+| JavaScript | ⭐️⭐️⭐️  | ✅ |
 
 ### Install (Node)
 
