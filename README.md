@@ -57,11 +57,6 @@ console.log(digest2)
 
 https://deno.land
 
-- Install [binaryen](https://github.com/WebAssembly/binaryen) (for wasm-opt) and
-  add it your PATH
-
-https://github.com/WebAssembly/binaryen/releases
-
 - Install [wasm-pack](https://github.com/rustwasm/wasm-pack)
 
 ```bash
