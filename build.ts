@@ -11,3 +11,5 @@ await Deno.writeTextFile(
   `./wasm/pkg/morax.wasm.d.ts`,
   `export const wasm: string;`
 );
+
+await Deno.removeSync(`./wasm/pkg/.gitignore`);

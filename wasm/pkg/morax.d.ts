@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
 */
-declare class Sha1Hasher {
+export class Sha1Hasher {
   free(): void;
 /**
 */
@@ -17,9 +17,9 @@ declare class Sha1Hasher {
   finalize(): Uint8Array;
 }
 
-type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
+export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
-interface InitOutput {
+export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly __wbg_sha1hasher_free: (a: number) => void;
   readonly sha1hasher_new: (a: number) => void;
@@ -30,7 +30,7 @@ interface InitOutput {
   readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
-type SyncInitInput = BufferSource | WebAssembly.Module;
+export type SyncInitInput = BufferSource | WebAssembly.Module;
 /**
 * Instantiates the given `module`, which can either be bytes or
 * a precompiled `WebAssembly.Module`.
@@ -39,7 +39,7 @@ type SyncInitInput = BufferSource | WebAssembly.Module;
 *
 * @returns {InitOutput}
 */
-declare function initSync(module: SyncInitInput): InitOutput;
+export function initSync(module: SyncInitInput): InitOutput;
 
 /**
 * If `module_or_path` is {RequestInfo} or {URL}, makes a request and
@@ -49,6 +49,4 @@ declare function initSync(module: SyncInitInput): InitOutput;
 *
 * @returns {Promise<InitOutput>}
 */
-declare function init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
-
-export { InitInput, InitOutput, Sha1Hasher, SyncInitInput, init as default, initSync };
+export default function init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;

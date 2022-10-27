@@ -1,0 +1,22 @@
+{
+  "name": "morax",
+  "collaborators": [
+    "hazae41 <hazae41@proton.me>"
+  ],
+  "description": "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing.",
+  "version": "1.0.0",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hazae41/morax-wasm"
+  },
+  "files": [
+    "morax_bg.wasm",
+    "morax.js",
+    "morax.d.ts",
+    "LICENSE.md"
+  ],
+  "module": "morax.js",
+  "types": "morax.d.ts",
+  "sideEffects": false
+}

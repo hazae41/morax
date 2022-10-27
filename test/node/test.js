@@ -1,5 +1,4 @@
-import * as Morax from "@hazae41/morax";
-import { Sha1Hasher } from "@hazae41/morax";
+import { Morax, Sha1Hasher } from "@hazae41/morax";
 
 Morax.initSyncBundledOnce()
 

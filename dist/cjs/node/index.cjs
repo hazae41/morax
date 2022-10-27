@@ -7,6 +7,8 @@ var morax = require('../wasm/pkg/morax.cjs');
 
 
 
+exports.Morax = index;
+exports.initBundledOnce = index.initBundledOnce;
 exports.initSyncBundledOnce = index.initSyncBundledOnce;
 exports.Sha1Hasher = morax.Sha1Hasher;
 exports.initSync = morax.initSync;

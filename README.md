@@ -3,6 +3,10 @@
 WebAssembly port of RustCrypto's [SHA-1](https://github.com/RustCrypto/block-ciphers), 
 a Rust implementations of SHA-1 hashing.
 
+```bash
+npm i @hazae41/morax
+```
+
 ### Use case 
 
 This WebAssembly module is useful when you want to use SHA-1 incrementially, as WebCrypto doesn't support incremental hashing, and want good performances.
@@ -12,12 +16,6 @@ This WebAssembly module is useful when you want to use SHA-1 incrementially, as 
 | Morax | ⭐️⭐️⭐️⭐️    | ✅ |
 | WebCrypto | ⭐️⭐️⭐️⭐️⭐️     | ❌ |
 | JavaScript | ⭐️⭐️⭐️  | ✅ |
-
-### Install (Node)
-
-```bash
-npm i @hazae41/morax
-```
 
 ### Usage
 

@@ -1,6 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
 
 let wasm;
 
@@ -64,7 +61,7 @@ function getArrayU8FromWasm0(ptr, len) {
 }
 /**
 */
-class Sha1Hasher {
+export class Sha1Hasher {
 
     static __wrap(ptr) {
         const obj = Object.create(Sha1Hasher.prototype);
@@ -168,6 +165,10 @@ function getImports() {
     return imports;
 }
 
+function initMemory(imports, maybe_memory) {
+
+}
+
 function finalizeInit(instance, module) {
     wasm = instance.exports;
     init.__wbindgen_wasm_module = module;
@@ -181,6 +182,8 @@ function finalizeInit(instance, module) {
 function initSync(module) {
     const imports = getImports();
 
+    initMemory(imports);
+
     if (!(module instanceof WebAssembly.Module)) {
         module = new WebAssembly.Module(module);
     }
@@ -192,7 +195,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('morax_bg.wasm', (typeof document === 'undefined' ? new (require('u' + 'rl').URL)('file:' + __filename).href : (document.currentScript && document.currentScript.src || new URL('wasm/pkg/morax.cjs', document.baseURI).href)));
+        input = new URL('morax_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
@@ -200,12 +203,12 @@ async function init(input) {
         input = fetch(input);
     }
 
+    initMemory(imports);
+
     const { instance, module } = await load(await input, imports);
 
     return finalizeInit(instance, module);
 }
 
-exports.Sha1Hasher = Sha1Hasher;
-exports["default"] = init;
-exports.initSync = initSync;
-//# sourceMappingURL=morax.cjs.map
+export { initSync }
+export default init;

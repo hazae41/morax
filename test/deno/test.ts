@@ -1,7 +1,6 @@
-import * as Morax from "../../deno/mod.ts";
-import { Sha1Hasher } from "../../deno/mod.ts";
+import { Morax, Sha1Hasher } from "../../deno/mod.ts";
 
-Morax.initSyncBundledOnce()
+await Morax.initBundledOnce()
 
 const hasher = new Sha1Hasher()
 
