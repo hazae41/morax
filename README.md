@@ -7,6 +7,8 @@ a Rust implementations of SHA-1 hashing.
 npm i @hazae41/morax
 ```
 
+[**Next.js CodeSandbox 🪣**](https://codesandbox.io/p/sandbox/l11euh) • [**Deno CodeSandbox 🪣**](https://codesandbox.io/p/sandbox/v7goxl) • [**Node CodeSandbox 🪣**](https://codesandbox.io/p/sandbox/unv2rh)
+
 ### Use case 
 
 This WebAssembly module is useful when you want to use SHA-1 incrementially, as WebCrypto doesn't support incremental hashing, and want good performances.
