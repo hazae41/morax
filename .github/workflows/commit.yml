@@ -1,7 +1,6 @@
-name: commit
+on: [push]
 
-on:
-- push
+name: commit
 
 jobs:
   check:
@@ -12,5 +11,13 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: 18
+    - uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+    - run: "cargo install wasm-pack"
     - run: "npm ci && npm run build"
-    - run: "[[ -z $(git status --porcelain) ]]"
+    - run: "git status --porcelain"
+    - run: "[[ -z $? ]]"
