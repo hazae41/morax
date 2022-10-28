@@ -53,24 +53,14 @@ console.log(digest2)
 
 ### Building
 
-- Install [Deno](https://github.com/denoland/deno)
-
-https://deno.land
-
 - Install [wasm-pack](https://github.com/rustwasm/wasm-pack)
 
 ```bash
 cargo install wasm-pack
 ```
 
-- Install dependencies
+- Clean and build
 
 ```bash
-npm install
-```
-
-- Build wasm and module
-
-```bash
-npm run build
+npm ci && npm run build
 ```
