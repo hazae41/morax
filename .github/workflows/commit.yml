@@ -9,5 +9,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: "docker compose up --build"
-    - run: "git status --porcelain"
-    - run: "[[ -z $? ]]"
+    - run: "[[ -z $(git status --porcelain) ]]"
