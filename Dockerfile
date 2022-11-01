@@ -10,6 +10,6 @@ RUN apt-get install -y nodejs
 
 RUN npm config set cache /tmp --global
 
-RUN chown -R $(whoami) /usr/local/cargo
+RUN chmod -R 777 /usr/local/cargo
 
 CMD npm ci && npm run build
