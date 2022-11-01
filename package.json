@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@hazae41/morax",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "hazae41",
   "license": "Unlicense",
   "description": "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing.",
