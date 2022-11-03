@@ -7,7 +7,7 @@ a Rust implementations of SHA-1 hashing.
 npm i @hazae41/morax
 ```
 
-[**Next.js CodeSandbox 🪣**](https://codesandbox.io/p/sandbox/l11euh) • [**Deno CodeSandbox 🪣**](https://codesandbox.io/p/sandbox/v7goxl) • [**Node CodeSandbox 🪣**](https://codesandbox.io/p/sandbox/unv2rh)
+[**Node Package 📦**](https://www.npmjs.com/package/@hazae41/morax) • [**Deno Module 🦖**](https://deno.land/x/morax) • [**Next.js CodeSandbox 🪣**](https://codesandbox.io/p/github/hazae41/morax-example-next)
 
 ### Use case 
 
