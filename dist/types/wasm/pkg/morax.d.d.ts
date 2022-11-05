@@ -22,11 +22,11 @@ type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Modul
 interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly __wbg_sha1hasher_free: (a: number) => void;
-  readonly sha1hasher_new: (a: number) => void;
+  readonly sha1hasher_new: () => number;
   readonly sha1hasher_update: (a: number, b: number, c: number) => void;
   readonly sha1hasher_finalize: (a: number, b: number) => void;
-  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;
+  readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
