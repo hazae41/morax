@@ -2,6 +2,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import ts from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
+import externals from "rollup-plugin-node-externals";
 import typescript from "ttypescript";
 
 export const config = [
@@ -15,8 +16,7 @@ export const config = [
       sourcemap: true,
       entryFileNames: "[name].cjs",
     }],
-    plugins: [resolve(), ts({ typescript }), commonjs()],
-    external: ["tslib"]
+    plugins: [resolve(), externals(), ts({ typescript }), commonjs()]
   },
   {
     input: "./src/node/index.ts",
@@ -27,8 +27,7 @@ export const config = [
       preserveModules: true,
       entryFileNames: "[name].d.ts",
     }],
-    plugins: [dts(), resolve(), ts({ typescript })],
-    external: ["tslib"]
+    plugins: [dts(), resolve(), externals(), ts({ typescript })]
   },
   {
     input: "./src/node/index.test.ts",
@@ -40,8 +39,7 @@ export const config = [
       sourcemap: true,
       entryFileNames: "[name].cjs",
     }],
-    plugins: [resolve(), ts({ typescript }), commonjs()],
-    external: ["tslib", "@hazae41/phobos"]
+    plugins: [resolve(), externals(), ts({ typescript }), commonjs()]
   }
 ]
 
