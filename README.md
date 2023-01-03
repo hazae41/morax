@@ -22,8 +22,7 @@ This WebAssembly module is useful when you want to use SHA-1 incrementially, as 
 ### Usage
 
 ```ts
-import * as Morax from "@hazae41/morax";
-import { Sha1Hasher } from "@hazae41/morax";
+import { Morax, Sha1Hasher } from "@hazae41/morax";
 
 // Wait for WASM to load
 Morax.initSyncBundledOnce()

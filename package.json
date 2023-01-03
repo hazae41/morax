@@ -23,7 +23,7 @@
     "test:deno": "deno run --unstable ./src/deno/mod.test.ts",
     "test": "npm run test:node && npm run test:deno",
     "example:deno": "deno run ./example/deno/mod.ts",
-    "example:node": "node ./example/node/index.js",
+    "example:node": "cd ./example/node && npm ci && node ./index.js",
     "prepare": "npm run build:dist"
   },
   "devDependencies": {
