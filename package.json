@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@hazae41/morax",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing.",
   "homepage": "https://github.com/hazae41/morax",
   "repository": "github:hazae41/morax",
@@ -27,10 +27,10 @@
     "prepare": "npm run build:dist"
   },
   "dependencies": {
-    "tslib": "^2.4.0"
+    "tslib": "^2.4.1"
   },
   "devDependencies": {
-    "@hazae41/phobos": "^1.0.6",
+    "@hazae41/phobos": "^1.0.7",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",

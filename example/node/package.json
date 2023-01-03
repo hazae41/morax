@@ -1,8 +1,5 @@
 {
   "type": "module",
-  "scripts": {
-    "test": "node test.js"
-  },
   "dependencies": {
     "@hazae41/morax": "file:../.."
   }
