@@ -7,7 +7,7 @@
   "repository": "github:hazae41/morax",
   "author": "hazae41",
   "license": "Unlicense",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/types/src/node/index.d.ts",
   "main": "./dist/cjs/src/node/index.cjs",
   "sideEffects": false,
   "files": [
@@ -41,7 +41,7 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
+      "types": "./dist/types/src/node/index.d.ts",
       "import": "./dist/cjs/src/node/index.cjs",
       "require": "./dist/cjs/src/node/index.cjs"
     }
