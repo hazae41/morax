@@ -1,7 +1,7 @@
-export * from "@/../../wasm/pkg/morax.js";
+export * from "../../../wasm/pkg/morax.js";
 
-import init, { InitOutput, initSync } from "@/../../wasm/pkg/morax.js";
-import { wasm } from "@/../../wasm/pkg/morax.wasm.js";
+import init, { InitOutput, initSync } from "../../../wasm/pkg/morax.js";
+import { wasm } from "../../../wasm/pkg/morax.wasm.js";
 
 let output: InitOutput | undefined = undefined
 
