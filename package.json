@@ -2,22 +2,32 @@
   "type": "module",
   "name": "@hazae41/morax",
   "version": "1.0.8",
-  "author": "hazae41",
-  "license": "Unlicense",
   "description": "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing.",
   "homepage": "https://github.com/hazae41/morax",
-  "types": "./dist/types/node/index.d.ts",
-  "main": "./dist/cjs/node/index.cjs",
+  "repository": "github:hazae41/morax",
+  "author": "hazae41",
+  "license": "Unlicense",
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/cjs/src/node/index.cjs",
   "sideEffects": false,
+  "files": [
+    "./dist/esm",
+    "./dist/cjs",
+    "./dist/types"
+  ],
   "scripts": {
     "build:wasm": "cd wasm && rimraf pkg && wasm-pack build --target web --release",
     "build:dist": "rimraf dist && node build.js && rollup -c",
-    "build": "npm run build:wasm && npm run build:dist"
-  },
-  "peerDependencies": {
-    "tslib": "^2.4.0"
+    "build": "npm run build:wasm && npm run build:dist",
+    "test:node": "node ./dist/test/src/node/index.test.cjs",
+    "test:deno": "deno run --unstable ./src/deno/mod.test.ts",
+    "test": "npm run test:node && npm run test:deno",
+    "example:deno": "deno run ./example/deno/mod.ts",
+    "example:node": "node ./example/node/index.js",
+    "prepare": "npm run build:dist"
   },
   "devDependencies": {
+    "@hazae41/phobos": "^1.0.6",
     "@rollup/plugin-commonjs": "^23.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-typescript": "^9.0.1",
@@ -31,9 +41,24 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/types/node/index.d.ts",
-      "import": "./dist/cjs/node/index.cjs",
-      "require": "./dist/cjs/node/index.cjs"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/cjs/src/node/index.cjs",
+      "require": "./dist/cjs/src/node/index.cjs"
     }
-  }
+  },
+  "keywords": [
+    "reproducible",
+    "webassembly",
+    "cryptography",
+    "incremental",
+    "hash",
+    "hashing",
+    "sha1",
+    "sha-1",
+    "browser",
+    "typescript",
+    "rust",
+    "unit-tested",
+    "deno"
+  ]
 }

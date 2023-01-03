@@ -6,7 +6,7 @@ import typescript from "ttypescript";
 
 export const config = [
   {
-    input: "./node/index.ts",
+    input: "./src/node/index.ts",
     output: [{
       dir: "./dist/cjs",
       format: "cjs",
@@ -19,7 +19,7 @@ export const config = [
     external: ["tslib"]
   },
   {
-    input: "./node/index.ts",
+    input: "./src/node/index.ts",
     output: [{
       dir: "./dist/types",
       format: "esm",
@@ -29,6 +29,19 @@ export const config = [
     }],
     plugins: [dts(), resolve(), ts({ typescript })],
     external: ["tslib"]
+  },
+  {
+    input: "./src/node/index.test.ts",
+    output: [{
+      dir: "./dist/test",
+      format: "cjs",
+      exports: "named",
+      preserveModules: true,
+      sourcemap: true,
+      entryFileNames: "[name].cjs",
+    }],
+    plugins: [resolve(), ts({ typescript }), commonjs()],
+    external: ["tslib", "@hazae41/phobos"]
   }
 ]
 
