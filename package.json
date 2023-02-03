@@ -17,8 +17,8 @@
     "./dist/types"
   ],
   "scripts": {
-    "build:wasm": "cd wasm && rimraf pkg && wasm-pack build --target web --release",
-    "build:dist": "rimraf dist && node build.js && rollup -c",
+    "build:wasm": "cd wasm && rimraf pkg && wasm-pack build --target web --release && node build.js",
+    "build:dist": "rimraf dist && rollup -c",
     "build": "npm run build:wasm && npm run build:dist",
     "test:node": "node ./dist/test/src/node/index.test.mjs",
     "test:deno": "deno run -A --unstable ./src/deno/mod.test.ts",
