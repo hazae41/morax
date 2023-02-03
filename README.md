@@ -1,7 +1,12 @@
-# SHA-1 for WebAssembly
+<div>
+  <img align="right" width="128" src="https://user-images.githubusercontent.com/4405263/216618885-198b5507-6e8b-4a38-aef0-dbca5957c744.png"/>
+  <p></p>
+</div>
+
+# Morax
 
 WebAssembly port of RustCrypto's [SHA-1](https://github.com/RustCrypto/block-ciphers), 
-a Rust implementations of SHA-1 hashing.
+a Rust implementation of SHA-1 hashing.
 
 ```bash
 npm i @hazae41/morax
