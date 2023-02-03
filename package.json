@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@hazae41/morax",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing.",
   "homepage": "https://github.com/hazae41/morax",
   "repository": "github:hazae41/morax",
@@ -17,7 +17,7 @@
     "./dist/types"
   ],
   "scripts": {
-    "build:wasm": "cd wasm && rimraf pkg && wasm-pack build --target web --release && node patch.js",
+    "build:wasm": "cd wasm && rimraf pkg && wasm-pack build --target web --release && cd .. && node patch.js",
     "build:dist": "rimraf dist && rollup -c",
     "build": "npm run build:wasm && npm run build:dist",
     "test:node": "node ./dist/test/src/node/index.test.mjs",
