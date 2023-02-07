@@ -3,7 +3,7 @@
   "collaborators": [
     "hazae41 <hazae41@proton.me>"
   ],
-  "description": "WebAssembly port of RustCrypto's SHA1, a Rust implementation of SHA-1 hashing.",
+  "description": "WebAssembly port of RustCrypto's SHA-1 and Sam Rijs's crc32fast, Rust implementations of SHA-1 hash and CRC32 (IEEE) checksum.",
   "version": "1.0.0",
   "license": "Unlicense",
   "repository": {

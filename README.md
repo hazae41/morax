@@ -24,6 +24,88 @@ This WebAssembly module is useful when you want to use hashes incrementially, as
 | WebCrypto | ⭐️⭐️⭐️⭐️⭐️     | ❌ |
 | JavaScript | ⭐️⭐️⭐️  | ✅ |
 
+## Benchmarks
+
+### SHA-1
+
+#### Deno
+
+```
+cpu: Apple M1 Max
+runtime: deno 1.30.3 (arm64-darwin)
+
+┌────────────────────────┬─────────────────┬────────────┬─────────────┐
+│ (idx)                  │ average         │ minimum    │ maximum     │
+├────────────────────────┼─────────────────┼────────────┼─────────────┤
+│ wasm sha1              │ "9.41 μs/iter"  │ "6.88 μs"  │ "199.92 μs" │
+│ webcrypto sha1         │ "24.46 μs/iter" │ "14.92 μs" │ "360.38 μs" │
+│ node:crypto sha1       │ "20.75 μs/iter" │ "13.08 μs" │ "3.56 ms"   │
+│ npm:@noble/hashes/sha1 │ "19.92 μs/iter" │ "15.87 μs" │ "759.75 μs" │
+└────────────────────────┴─────────────────┴────────────┴─────────────┘
+
+Summary
+- wasm sha1 is 2.60x faster than webcrypto sha1
+- wasm sha1 is 2.21x faster than node:crypto sha1
+- wasm sha1 is 2.12x faster than npm:@noble/hashes/sha1
+```
+
+#### Node
+
+```
+cpu: Apple M1 Max
+runtime: node v18.12.1 (arm64-darwin)
+
+┌────────────────────────┬─────────────────┬───────────┬─────────────┐
+│        (index)         │     average     │  minimum  │   maximum   │
+├────────────────────────┼─────────────────┼───────────┼─────────────┤
+│       wasm sha1        │ '6.07 μs/iter'  │ '5.37 μs' │ '23.71 μs'  │
+│     webcrypto sha1     │ '12.34 μs/iter' │ '9.04 μs' │ '852.58 μs' │
+│    node:crypto sha1    │ '3.48 μs/iter'  │ '2.83 μs' │ '88.50 μs'  │
+│ npm:@noble/hashes/sha1 │ '7.34 μs/iter'  │ '6.37 μs' │ '746.42 μs' │
+└────────────────────────┴─────────────────┴───────────┴─────────────┘
+
+Summary
+- wasm sha1 is 2.03x faster than webcrypto sha1
+- wasm sha1 is 0.57x faster than node:crypto sha1
+- wasm sha1 is 1.21x faster than npm:@noble/hashes/sha1
+```
+
+### CRC32
+
+#### Deno
+
+```
+cpu: Apple M1 Max
+runtime: deno 1.30.3 (arm64-darwin)
+
+┌────────────┬────────────────┬───────────┬─────────────┐
+│ (idx)      │ average        │ minimum   │ maximum     │
+├────────────┼────────────────┼───────────┼─────────────┤
+│ wasm crc32 │ "3.04 μs/iter" │ "2.17 μs" │ "198.04 μs" │
+│ npm:crc-32 │ "4.36 μs/iter" │ "2.04 μs" │ "97.96 μs"  │
+└────────────┴────────────────┴───────────┴─────────────┘
+
+Summary
+- wasm crc32 is 1.44x faster than npm:crc-32
+```
+
+#### Node
+
+```
+cpu: Apple M1 Max
+runtime: node v18.12.1 (arm64-darwin)
+
+┌────────────┬────────────────┬───────────┬────────────┐
+│  (index)   │    average     │  minimum  │  maximum   │
+├────────────┼────────────────┼───────────┼────────────┤
+│ wasm crc32 │ '2.40 μs/iter' │ '2.00 μs' │ '53.88 μs' │
+│ npm:crc-32 │ '3.73 μs/iter' │ '2.25 μs' │ '1.11 ms'  │
+└────────────┴────────────────┴───────────┴────────────┘
+
+Summary
+- wasm crc32 is 1.55x faster than npm:crc-32
+```
+
 ## Usage
 
 ### SHA-1
