@@ -1,0 +1,1 @@
+await import("./crc32.bench.js")

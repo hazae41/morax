@@ -1,1 +1,1 @@
-export * from "./mods/index.test.js";
+export * from "./test/index.test.js";

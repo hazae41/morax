@@ -5,8 +5,8 @@
 
 # Morax
 
-WebAssembly port of RustCrypto's [SHA-1](https://github.com/RustCrypto/block-ciphers), 
-a Rust implementation of SHA-1 hashing.
+WebAssembly port of RustCrypto's [SHA-1](https://github.com/RustCrypto/block-ciphers) and Sam Rijs's [crc32fast](https://github.com/srijs/rust-crc32fast), 
+Rust implementations of SHA-1 hash and CRC32 (IEEE) checksum.
 
 ```bash
 npm i @hazae41/morax
@@ -14,9 +14,9 @@ npm i @hazae41/morax
 
 [**Node Package 📦**](https://www.npmjs.com/package/@hazae41/morax) • [**Deno Module 🦖**](https://deno.land/x/morax) • [**Next.js CodeSandbox 🪣**](https://codesandbox.io/p/github/hazae41/morax-example-next)
 
-### Use case 
+## Use case 
 
-This WebAssembly module is useful when you want to use SHA-1 incrementially, as WebCrypto doesn't support incremental hashing, and want good performances.
+This WebAssembly module is useful when you want to use hashes incrementially, as WebCrypto doesn't support incremental hashing, and want good performances.
 
 |  | Performances | Incremental hashing |
 |---|---|---|
@@ -24,7 +24,9 @@ This WebAssembly module is useful when you want to use SHA-1 incrementially, as 
 | WebCrypto | ⭐️⭐️⭐️⭐️⭐️     | ❌ |
 | JavaScript | ⭐️⭐️⭐️  | ✅ |
 
-### Usage
+## Usage
+
+### SHA-1
 
 ```ts
 import { Morax, Sha1Hasher } from "@hazae41/morax";
@@ -54,6 +56,39 @@ const digest2 = hasher.finalize()
 console.log(digest)
 console.log(digest2)
 ```
+
+### CRC32
+
+```ts
+import { Morax, Crc32Hasher } from "@hazae41/morax";
+
+// Wait for WASM to load
+Morax.initSyncBundledOnce()
+
+// Create a hash
+const hasher = new Crc32Hasher()
+
+// Data to be hashed
+const hello = new TextEncoder().encode("Hello World")
+
+// Update the hash with your data
+hasher.update(hello)
+
+// Grab the checksum (number)
+const checksum = hasher.finalize()
+
+// Update the hash another time
+hasher.update(hello)
+
+// Grab the checksum (number)
+const checksum2 = hasher.finalize()
+
+// checksum !== checksum2
+console.log(checksum)
+console.log(checksum2)
+```
+
+## Building
 
 ### Unreproducible building
 

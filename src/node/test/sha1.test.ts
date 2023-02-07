@@ -1,5 +1,5 @@
 import { assert, test } from "@hazae41/phobos"
-import { initBundledOnce, Sha1Hasher } from "./index.js"
+import { initBundledOnce, Sha1Hasher } from "mods/index.js"
 
 function equals(a: Uint8Array, b: Uint8Array) {
   const ba = Buffer.from(a.buffer)

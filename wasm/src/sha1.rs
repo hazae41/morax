@@ -5,6 +5,15 @@ use alloc::{boxed::Box, vec::Vec};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+pub fn sha1(data: &[u8]) -> Vec<u8> {
+    use sha1::Digest;
+
+    let mut hasher = sha1::Sha1::new();
+    hasher.update(data);
+    hasher.finalize().to_vec()
+}
+
+#[wasm_bindgen]
 pub struct Sha1Hasher {
     pub(crate) inner: Box<sha1::Sha1>,
 }
