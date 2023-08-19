@@ -5,8 +5,7 @@
 
 # Morax
 
-WebAssembly port of RustCrypto's [SHA-1](https://github.com/RustCrypto/block-ciphers) and Sam Rijs's [crc32fast](https://github.com/srijs/rust-crc32fast), 
-Rust implementations of SHA-1 hash and CRC32 (IEEE) checksum.
+WebAssembly port of RustCrypto's [SHA-1 and Keccak-256](https://github.com/RustCrypto/block-ciphers) and Sam Rijs's [crc32fast](https://github.com/srijs/rust-crc32fast)
 
 ```bash
 npm i @hazae41/morax
@@ -44,9 +43,9 @@ runtime: deno 1.30.3 (arm64-darwin)
 └────────────────────────┴─────────────────┴────────────┴─────────────┘
 
 Summary
-- wasm sha1 is 2.60x faster than webcrypto sha1
-- wasm sha1 is 2.21x faster than node:crypto sha1
-- wasm sha1 is 2.12x faster than npm:@noble/hashes/sha1
+- wasm sha1 is 2.60x faster than WebCrypto
+- wasm sha1 is 2.21x faster than node:crypto
+- wasm sha1 is 2.12x faster than npm:@noble/hashes
 ```
 
 #### Node
@@ -65,9 +64,42 @@ runtime: node v18.12.1 (arm64-darwin)
 └────────────────────────┴─────────────────┴───────────┴─────────────┘
 
 Summary
-- wasm sha1 is 2.03x faster than webcrypto sha1
-- wasm sha1 is 0.57x faster than node:crypto sha1
-- wasm sha1 is 1.21x faster than npm:@noble/hashes/sha1
+- wasm sha1 is 2.03x faster than WebCrypto
+- wasm sha1 is 0.57x faster than node:crypto
+- wasm sha1 is 1.21x faster than npm:@noble/hashes
+```
+
+### Keccak-256
+
+#### Deno
+
+```
+┌───────────────────┬─────────────────┬────────────┬─────────────┐
+│ (idx)             │ average         │ minimum    │ maximum     │
+├───────────────────┼─────────────────┼────────────┼─────────────┤
+│ wasm keccak256    │ "4.91 μs/iter"  │ "4.37 μs"  │ "25.37 μs"  │
+│ npm:@noble/hashes │ "60.01 μs/iter" │ "57.83 μs" │ "195.50 μs" │
+└───────────────────┴─────────────────┴────────────┴─────────────┘
+
+Summary
+- wasm keccak256 is 12.22x faster than npm:@noble/hashes
+```
+
+#### Node
+
+```
+cpu: Apple M1 Max
+runtime: node v20.3.1 (arm64-darwin)
+
+┌───────────────────┬─────────────────┬────────────┬─────────────┐
+│      (index)      │     average     │  minimum   │   maximum   │
+├───────────────────┼─────────────────┼────────────┼─────────────┤
+│  wasm keccak256   │ '3.10 μs/iter'  │ '2.92 μs'  │ '104.00 μs' │
+│ npm:@noble/hashes │ '62.28 μs/iter' │ '60.21 μs' │ '166.33 μs' │
+└───────────────────┴─────────────────┴────────────┴─────────────┘
+
+Summary
+- wasm keccak256 is 20.08x faster than npm:@noble/hashes
 ```
 
 ### CRC32
@@ -108,7 +140,52 @@ Summary
 
 ## Usage
 
-### SHA-1
+### SHA-1 (direct)
+
+```ts
+import { Morax, sha1 } from "@hazae41/morax";
+
+// Wait for WASM to load
+Morax.initSyncBundledOnce()
+
+// Data to be hashed
+const hello = new TextEncoder().encode("Hello World")
+
+// Grab the digest (20 bytes)
+const digest = sha1(hello)
+```
+
+### Keccak-256 (direct)
+
+```ts
+import { Morax, keccak256 } from "@hazae41/morax";
+
+// Wait for WASM to load
+Morax.initSyncBundledOnce()
+
+// Data to be hashed
+const hello = new TextEncoder().encode("Hello World")
+
+// Grab the digest (32 bytes)
+const digest = keccak256(hello)
+```
+
+### CRC32 (direct)
+
+```ts
+import { Morax, crc32 } from "@hazae41/morax";
+
+// Wait for WASM to load
+Morax.initSyncBundledOnce()
+
+// Data to be hashed
+const hello = new TextEncoder().encode("Hello World")
+
+// Grab the digest (number)
+const digest = crc32(hello)
+```
+
+### SHA-1 (incremential)
 
 ```ts
 import { Morax, Sha1Hasher } from "@hazae41/morax";
@@ -139,7 +216,38 @@ console.log(digest)
 console.log(digest2)
 ```
 
-### CRC32
+### Keccak-256 (incremential)
+
+```ts
+import { Morax, Keccak256Hasher } from "@hazae41/morax";
+
+// Wait for WASM to load
+Morax.initSyncBundledOnce()
+
+// Create a hash
+const hasher = new Keccak256Hasher()
+
+// Data to be hashed
+const hello = new TextEncoder().encode("Hello World")
+
+// Update the hash with your data
+hasher.update(hello)
+
+// Grab the digest (32 bytes)
+const digest = hasher.finalize()
+
+// Update the hash another time
+hasher.update(hello)
+
+// Grab the digest (32 bytes)
+const digest2 = hasher.finalize()
+
+// digest !== digest2
+console.log(digest)
+console.log(digest2)
+```
+
+### CRC32 (incremential)
 
 ```ts
 import { Morax, Crc32Hasher } from "@hazae41/morax";

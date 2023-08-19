@@ -9,7 +9,9 @@ const samples = 1000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 
-const resultWasm = benchSync("wasm keccak256", () => {
+console.log("Keccak-256")
+
+const resultWasm = benchSync("Morax", () => {
   keccak256(data)
 }, { samples })
 
@@ -18,3 +20,5 @@ const resultNoble = benchSync("npm:@noble/hashes", () => {
 }, { samples })
 
 resultWasm.tableAndSummary(resultNoble)
+
+console.log()

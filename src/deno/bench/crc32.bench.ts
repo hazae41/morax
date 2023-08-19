@@ -8,7 +8,9 @@ const samples = 1000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 
-const resultWasm = benchSync("wasm crc32", () => {
+console.log("CRC32")
+
+const resultWasm = benchSync("Morax", () => {
   crc32(data)
 }, { samples })
 
@@ -17,3 +19,5 @@ const resultJs = benchSync("npm:crc-32", () => {
 }, { samples })
 
 resultWasm.tableAndSummary(resultJs)
+
+console.log()

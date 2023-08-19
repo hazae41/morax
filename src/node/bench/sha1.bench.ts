@@ -10,15 +10,17 @@ const samples = 1000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 
-const resultWasm = benchSync("wasm sha1", () => {
+console.log("SHA-1")
+
+const resultWasm = benchSync("Morax", () => {
   sha1(data)
 }, { samples })
 
-const resultWebCrypto = await bench("webcrypto sha1", async () => {
+const resultWebCrypto = await bench("WebCrypto", async () => {
   await crypto.subtle.digest("SHA-1", data)
 }, { samples })
 
-const resultNative = benchSync("node:crypto sha1", () => {
+const resultNative = benchSync("node:crypto", () => {
   const hasher = crypto.createHash("sha1")
   hasher.update(data)
   hasher.digest()
@@ -33,3 +35,5 @@ console.info(`runtime:`, `node ${process.version} (${process.arch}-${process.pla
 console.info()
 
 resultWasm.tableAndSummary(resultWebCrypto, resultNative, resultNoble)
+
+console.log()

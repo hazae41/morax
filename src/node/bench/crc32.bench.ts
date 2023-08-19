@@ -10,7 +10,9 @@ const samples = 1000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 
-const resultWasm = await bench(`wasm crc32`, async () => {
+console.log("CRC32")
+
+const resultWasm = await bench(`Morax`, async () => {
   crc32(data)
 }, { samples })
 
@@ -23,3 +25,5 @@ console.info(`runtime:`, `node ${process.version} (${process.arch}-${process.pla
 console.info()
 
 resultWasm.tableAndSummary(resultJs)
+
+console.log()
