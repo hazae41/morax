@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@hazae41/morax",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "WebAssembly port of RustCrypto's SHA-1 and Sam Rijs's crc32fast, Rust implementations of SHA-1 hash and CRC32 (IEEE) checksum.",
   "homepage": "https://github.com/hazae41/morax",
   "repository": "github:hazae41/morax",
