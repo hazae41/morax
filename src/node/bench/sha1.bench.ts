@@ -8,33 +8,23 @@ await initBundledOnce()
 
 const samples = 1000
 
-const resultWasm = benchSync("wasm sha1", () => {
-  const data = new Uint8Array(1024)
-  crypto.webcrypto.getRandomValues(data)
+const data = crypto.getRandomValues(new Uint8Array(1024))
 
+const resultWasm = benchSync("wasm sha1", () => {
   sha1(data)
 }, { samples })
 
 const resultWebCrypto = await bench("webcrypto sha1", async () => {
-  const data = new Uint8Array(1024)
-  crypto.webcrypto.getRandomValues(data)
-
   await crypto.subtle.digest("SHA-1", data)
 }, { samples })
 
 const resultNative = benchSync("node:crypto sha1", () => {
-  const data = new Uint8Array(1024)
-  crypto.webcrypto.getRandomValues(data)
-
   const hasher = crypto.createHash("sha1")
   hasher.update(data)
   hasher.digest()
 }, { samples })
 
-const resultNoble = benchSync("npm:@noble/hashes/sha1", () => {
-  const data = new Uint8Array(1024)
-  crypto.webcrypto.getRandomValues(data)
-
+const resultNoble = benchSync("npm:@noble/hashes", () => {
   nobleSha1(data)
 }, { samples })
 

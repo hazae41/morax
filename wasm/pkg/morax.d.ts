@@ -4,12 +4,17 @@
 * @param {Uint8Array} data
 * @returns {Uint8Array}
 */
-export function sha1(data: Uint8Array): Uint8Array;
+export function keccak256(data: Uint8Array): Uint8Array;
 /**
 * @param {Uint8Array} data
 * @returns {number}
 */
 export function crc32(data: Uint8Array): number;
+/**
+* @param {Uint8Array} data
+* @returns {Uint8Array}
+*/
+export function sha1(data: Uint8Array): Uint8Array;
 /**
 */
 export class Crc32Hasher {
@@ -25,6 +30,22 @@ export class Crc32Hasher {
 * @returns {number}
 */
   finalize(): number;
+}
+/**
+*/
+export class Keccak256Hasher {
+  free(): void;
+/**
+*/
+  constructor();
+/**
+* @param {Uint8Array} data
+*/
+  update(data: Uint8Array): void;
+/**
+* @returns {Uint8Array}
+*/
+  finalize(): Uint8Array;
 }
 /**
 */
@@ -47,15 +68,20 @@ export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembl
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly sha1: (a: number, b: number, c: number) => void;
-  readonly sha1hasher_new: () => number;
-  readonly sha1hasher_update: (a: number, b: number, c: number) => void;
-  readonly sha1hasher_finalize: (a: number, b: number) => void;
+  readonly keccak256: (a: number, b: number, c: number) => void;
+  readonly keccak256hasher_new: () => number;
+  readonly keccak256hasher_update: (a: number, b: number, c: number) => void;
+  readonly keccak256hasher_finalize: (a: number, b: number) => void;
   readonly crc32: (a: number, b: number) => number;
   readonly __wbg_crc32hasher_free: (a: number) => void;
   readonly crc32hasher_new: () => number;
   readonly crc32hasher_update: (a: number, b: number, c: number) => void;
   readonly crc32hasher_finalize: (a: number) => number;
+  readonly sha1: (a: number, b: number, c: number) => void;
+  readonly sha1hasher_new: () => number;
+  readonly sha1hasher_update: (a: number, b: number, c: number) => void;
+  readonly sha1hasher_finalize: (a: number, b: number) => void;
+  readonly __wbg_keccak256hasher_free: (a: number) => void;
   readonly __wbg_sha1hasher_free: (a: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number) => number;

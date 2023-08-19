@@ -13,10 +13,11 @@
   "files": [
     "morax_bg.wasm",
     "morax.js",
-    "morax.d.ts",
-    "LICENSE.md"
+    "morax.d.ts"
   ],
   "module": "morax.js",
   "types": "morax.d.ts",
-  "sideEffects": false
+  "sideEffects": [
+    "./snippets/*"
+  ]
 }

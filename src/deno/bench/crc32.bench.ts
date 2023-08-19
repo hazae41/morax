@@ -6,17 +6,13 @@ await initBundledOnce()
 
 const samples = 1000
 
-const resultWasm = benchSync("wasm crc32", () => {
-  const data = new Uint8Array(1024)
-  crypto.getRandomValues(data)
+const data = crypto.getRandomValues(new Uint8Array(1024))
 
+const resultWasm = benchSync("wasm crc32", () => {
   crc32(data)
 }, { samples })
 
 const resultJs = benchSync("npm:crc-32", () => {
-  const data = new Uint8Array(1024)
-  crypto.getRandomValues(data)
-
   CRC32.buf(data) >>> 0
 }, { samples })
 
