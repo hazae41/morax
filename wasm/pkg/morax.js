@@ -61,17 +61,6 @@ export function keccak256(data) {
 
 /**
 * @param {Uint8Array} data
-* @returns {number}
-*/
-export function crc32(data) {
-    const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-    const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.crc32(ptr0, len0);
-    return ret >>> 0;
-}
-
-/**
-* @param {Uint8Array} data
 * @returns {Uint8Array}
 */
 export function sha1(data) {
@@ -88,6 +77,17 @@ export function sha1(data) {
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
     }
+}
+
+/**
+* @param {Uint8Array} data
+* @returns {number}
+*/
+export function crc32(data) {
+    const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.crc32(ptr0, len0);
+    return ret >>> 0;
 }
 
 /**
