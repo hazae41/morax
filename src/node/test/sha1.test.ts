@@ -1,5 +1,5 @@
 import { assert, test } from "@hazae41/phobos"
-import { initBundledOnce, Sha1Hasher } from "mods/index.js"
+import { Sha1Hasher, initSyncBundledOnce } from "mods/index.js"
 
 function equals(a: Uint8Array, b: Uint8Array) {
   const ba = Buffer.from(a.buffer)
@@ -9,7 +9,7 @@ function equals(a: Uint8Array, b: Uint8Array) {
 }
 
 test("SHA-1", async () => {
-  await initBundledOnce()
+  initSyncBundledOnce()
 
   const hello = new TextEncoder().encode("Hello World")
 

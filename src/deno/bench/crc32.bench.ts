@@ -1,8 +1,8 @@
 import { benchSync } from "npm:@hazae41/deimos"
 import CRC32 from "npm:crc-32"
-import { crc32, initBundledOnce } from "../mods/mod.ts"
+import { crc32, initSyncBundledOnce } from "../mods/mod.ts"
 
-await initBundledOnce()
+initSyncBundledOnce()
 
 const samples = 1000
 

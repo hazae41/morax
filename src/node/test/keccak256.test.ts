@@ -1,5 +1,5 @@
 import { assert, test } from "@hazae41/phobos"
-import { Keccak256Hasher, initBundledOnce } from "mods/index.js"
+import { Keccak256Hasher, initSyncBundledOnce } from "mods/index.js"
 
 function equals(a: Uint8Array, b: Uint8Array) {
   const ba = Buffer.from(a.buffer)
@@ -9,7 +9,7 @@ function equals(a: Uint8Array, b: Uint8Array) {
 }
 
 test("keccak256", async () => {
-  await initBundledOnce()
+  initSyncBundledOnce()
 
   const hello = new TextEncoder().encode("Hello World")
 

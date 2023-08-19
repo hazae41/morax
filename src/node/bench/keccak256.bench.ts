@@ -1,10 +1,10 @@
 import { benchSync } from "@hazae41/deimos";
 import { keccak_256 } from '@noble/hashes/sha3';
 import crypto from "crypto";
-import { initBundledOnce, keccak256 } from "mods/index.js";
+import { initSyncBundledOnce, keccak256 } from "mods/index.js";
 import { cpus } from "os";
 
-await initBundledOnce()
+initSyncBundledOnce()
 
 const samples = 1000
 

@@ -5,7 +5,6 @@ writeFileSync(`./wasm/pkg/morax.wasm.js`, `export const wasm = "${wasm.toString(
 writeFileSync(`./wasm/pkg/morax.wasm.d.ts`, `export const wasm: string;`);
 
 const script = readFileSync(`./wasm/pkg/morax.js`, "utf8")
-  .replace("export { initSync }", "export { init, initSync }")
   .replace("input = new URL('morax_bg.wasm', import.meta.url);", "throw new Error();")
 
 const typing = readFileSync(`./wasm/pkg/morax.d.ts`, "utf8")
