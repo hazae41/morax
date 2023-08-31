@@ -2,14 +2,14 @@
 /* eslint-disable */
 /**
 * @param {Uint8Array} data
-* @returns {Uint8Array}
+* @returns {Slice}
 */
-export function keccak256(data: Uint8Array): Uint8Array;
+export function keccak256(data: Uint8Array): Slice;
 /**
 * @param {Uint8Array} data
-* @returns {Uint8Array}
+* @returns {Slice}
 */
-export function sha1(data: Uint8Array): Uint8Array;
+export function sha1(data: Uint8Array): Slice;
 /**
 * @param {Uint8Array} data
 * @returns {number}
@@ -43,9 +43,9 @@ export class Keccak256Hasher {
 */
   update(data: Uint8Array): void;
 /**
-* @returns {Uint8Array}
+* @returns {Slice}
 */
-  finalize(): Uint8Array;
+  finalize(): Slice;
 }
 /**
 */
@@ -59,9 +59,9 @@ export class Sha1Hasher {
 */
   update(data: Uint8Array): void;
 /**
-* @returns {Uint8Array}
+* @returns {Slice}
 */
-  finalize(): Uint8Array;
+  finalize(): Slice;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
@@ -107,4 +107,16 @@ export function initSync(module: SyncInitInput): InitOutput;
 *
 * @returns {Promise<InitOutput>}
 */
-export default function __wbg_init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
+export function __wbg_init (module_or_path?: InitInput | Promise<InitInput>): Promise<InitOutput>;
+
+export class Slice {
+
+  readonly ptr: number
+
+  readonly len: number
+
+  constructor(ptr: number, len: number);
+
+  get bytes(): Uint8Array
+
+}

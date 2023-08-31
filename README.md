@@ -5,7 +5,7 @@
 
 # Morax
 
-WebAssembly port of RustCrypto's [SHA-1 and Keccak-256](https://github.com/RustCrypto/block-ciphers) and Sam Rijs's [crc32fast](https://github.com/srijs/rust-crc32fast)
+WebAssembly port of various hashing algorithms
 
 ```bash
 npm i @hazae41/morax
@@ -13,15 +13,15 @@ npm i @hazae41/morax
 
 [**Node Package 📦**](https://www.npmjs.com/package/@hazae41/morax) • [**Deno Module 🦖**](https://deno.land/x/morax) • [**Next.js CodeSandbox 🪣**](https://codesandbox.io/p/github/hazae41/morax-example-next)
 
-## Use case 
+## Algorithms
+- Incremental SHA-1 from RustCrypto (sha1)
+- Incremental Keccak-256 from RustCrypto (sha3)
+- Incremental CRC-32 from Sam Rijs (crc32fast)
 
-This WebAssembly module is useful when you want to use hashes incrementially, as WebCrypto doesn't support incremental hashing, and want good performances.
-
-|  | Performances | Incremental hashing |
-|---|---|---|
-| Morax | ⭐️⭐️⭐️⭐️    | ✅ |
-| WebCrypto | ⭐️⭐️⭐️⭐️⭐️     | ❌ |
-| JavaScript | ⭐️⭐️⭐️  | ✅ |
+## Features
+- Reproducible building
+- Pre-bundled and streamed
+- Zero-copy memory slices
 
 ## Benchmarks
 
@@ -152,7 +152,7 @@ Morax.initSyncBundledOnce()
 const hello = new TextEncoder().encode("Hello World")
 
 // Grab the digest (20 bytes)
-const digest = sha1(hello)
+const digest = sha1(hello).bytes.slice()
 ```
 
 ### Keccak-256 (direct)
@@ -167,7 +167,7 @@ Morax.initSyncBundledOnce()
 const hello = new TextEncoder().encode("Hello World")
 
 // Grab the digest (32 bytes)
-const digest = keccak256(hello)
+const digest = keccak256(hello).bytes.slice()
 ```
 
 ### CRC32 (direct)
@@ -185,7 +185,7 @@ const hello = new TextEncoder().encode("Hello World")
 const digest = crc32(hello)
 ```
 
-### SHA-1 (incremential)
+### SHA-1 (incremental)
 
 ```ts
 import { Morax, Sha1Hasher } from "@hazae41/morax";
@@ -203,20 +203,20 @@ const hello = new TextEncoder().encode("Hello World")
 hasher.update(hello)
 
 // Grab the digest (20 bytes)
-const digest = hasher.finalize()
+const digest = hasher.finalize().bytes.slice()
 
 // Update the hash another time
 hasher.update(hello)
 
 // Grab the digest (20 bytes)
-const digest2 = hasher.finalize()
+const digest2 = hasher.finalize().bytes.slice()
 
 // digest !== digest2
 console.log(digest)
 console.log(digest2)
 ```
 
-### Keccak-256 (incremential)
+### Keccak-256 (incremental)
 
 ```ts
 import { Morax, Keccak256Hasher } from "@hazae41/morax";
@@ -234,20 +234,20 @@ const hello = new TextEncoder().encode("Hello World")
 hasher.update(hello)
 
 // Grab the digest (32 bytes)
-const digest = hasher.finalize()
+const digest = hasher.finalize().bytes.slice()
 
 // Update the hash another time
 hasher.update(hello)
 
 // Grab the digest (32 bytes)
-const digest2 = hasher.finalize()
+const digest2 = hasher.finalize().bytes.slice()
 
 // digest !== digest2
 console.log(digest)
 console.log(digest2)
 ```
 
-### CRC32 (incremential)
+### CRC32 (incremental)
 
 ```ts
 import { Morax, Crc32Hasher } from "@hazae41/morax";

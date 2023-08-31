@@ -1,10 +1,10 @@
 import { bench } from "@hazae41/deimos"
 import CRC32 from "crc-32"
 import crypto from "crypto"
-import { crc32, initSyncBundledOnce } from "mods/index.js"
+import { crc32, initBundledOnce } from "mods/index.js"
 import { cpus } from "os"
 
-initSyncBundledOnce()
+await initBundledOnce()
 
 const samples = 1000
 

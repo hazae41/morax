@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto";
 import { bench, benchSync } from "npm:@hazae41/deimos";
 import { sha1 as nobleSha1 } from "npm:@noble/hashes/sha1";
-import { initSyncBundledOnce, sha1 } from "../mods/mod.ts";
+import { initBundledOnce, sha1 } from "../mods/mod.ts";
 
-initSyncBundledOnce()
+await initBundledOnce()
 
 const samples = 1000
 

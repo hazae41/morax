@@ -1,8 +1,8 @@
 import { assert, test } from "@hazae41/phobos"
-import { Crc32Hasher, initSyncBundledOnce } from "mods/index.js"
+import { Crc32Hasher, initBundledOnce } from "mods/index.js"
 
 test("CRC32", async () => {
-  initSyncBundledOnce()
+  await initBundledOnce()
 
   const hello = new TextEncoder().encode("Hello World")
 

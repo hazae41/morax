@@ -1,9 +1,9 @@
 import { benchSync } from "npm:@hazae41/deimos";
 import { keccak_256 } from "npm:@noble/hashes/sha3";
 import { keccak256 } from "../mod.ts";
-import { initSyncBundledOnce } from "../mods/mod.ts";
+import { initBundledOnce } from "../mods/mod.ts";
 
-initSyncBundledOnce()
+await initBundledOnce()
 
 const samples = 1000
 

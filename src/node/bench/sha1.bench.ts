@@ -1,10 +1,10 @@
 import { bench, benchSync } from "@hazae41/deimos";
 import { sha1 as nobleSha1 } from '@noble/hashes/sha1';
 import crypto from "crypto";
-import { initSyncBundledOnce, sha1 } from "mods/index.js";
+import { initBundledOnce, sha1 } from "mods/index.js";
 import { cpus } from "os";
 
-initSyncBundledOnce()
+await initBundledOnce()
 
 const samples = 1000
 

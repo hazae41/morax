@@ -42,7 +42,7 @@ function getArrayU8FromWasm0(ptr, len) {
 }
 /**
 * @param {Uint8Array} data
-* @returns {Uint8Array}
+* @returns {Slice}
 */
 export function keccak256(data) {
     try {
@@ -52,8 +52,8 @@ export function keccak256(data) {
         wasm.keccak256(retptr, ptr0, len0);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = getArrayU8FromWasm0(r0, r1).slice();
-        wasm.__wbindgen_free(r0, r1 * 1);
+        var v2 = new Slice((r0 >>> 0) / 1, r1);
+        
         return v2;
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
@@ -62,7 +62,7 @@ export function keccak256(data) {
 
 /**
 * @param {Uint8Array} data
-* @returns {Uint8Array}
+* @returns {Slice}
 */
 export function sha1(data) {
     try {
@@ -72,8 +72,8 @@ export function sha1(data) {
         wasm.sha1(retptr, ptr0, len0);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = getArrayU8FromWasm0(r0, r1).slice();
-        wasm.__wbindgen_free(r0, r1 * 1);
+        var v2 = new Slice((r0 >>> 0) / 1, r1);
+        
         return v2;
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
@@ -174,7 +174,7 @@ export class Keccak256Hasher {
         wasm.keccak256hasher_update(this.__wbg_ptr, ptr0, len0);
     }
     /**
-    * @returns {Uint8Array}
+    * @returns {Slice}
     */
     finalize() {
         try {
@@ -182,8 +182,8 @@ export class Keccak256Hasher {
             wasm.keccak256hasher_finalize(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = getArrayU8FromWasm0(r0, r1).slice();
-            wasm.__wbindgen_free(r0, r1 * 1);
+            var v1 = new Slice((r0 >>> 0) / 1, r1);
+            
             return v1;
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
@@ -228,7 +228,7 @@ export class Sha1Hasher {
         wasm.sha1hasher_update(this.__wbg_ptr, ptr0, len0);
     }
     /**
-    * @returns {Uint8Array}
+    * @returns {Slice}
     */
     finalize() {
         try {
@@ -236,8 +236,8 @@ export class Sha1Hasher {
             wasm.sha1hasher_finalize(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = getArrayU8FromWasm0(r0, r1).slice();
-            wasm.__wbindgen_free(r0, r1 * 1);
+            var v1 = new Slice((r0 >>> 0) / 1, r1);
+            
             return v1;
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
@@ -316,7 +316,7 @@ function initSync(module) {
     return __wbg_finalize_init(instance, module);
 }
 
-async function __wbg_init(input) {
+export async function __wbg_init(input) {
     if (wasm !== undefined) return wasm;
 
     if (typeof input === 'undefined') {
@@ -337,3 +337,23 @@ async function __wbg_init(input) {
 
 export { initSync }
 export default __wbg_init;
+
+export class Slice {
+
+  /**
+   * @param {number} ptr 
+   * @param {number} len 
+   */
+  constructor(ptr, len) {
+    this.ptr = ptr
+    this.len = len
+  }
+
+  /**
+   * @returns {Uint8Array}
+   */
+  get bytes() {
+    return getUint8Memory0().subarray(this.ptr, this.ptr + this.len)
+  }
+
+}

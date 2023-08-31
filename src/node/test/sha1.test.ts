@@ -1,5 +1,5 @@
 import { assert, test } from "@hazae41/phobos"
-import { Sha1Hasher, initSyncBundledOnce } from "mods/index.js"
+import { Sha1Hasher, initBundledOnce } from "mods/index.js"
 
 function equals(a: Uint8Array, b: Uint8Array) {
   const ba = Buffer.from(a.buffer)
@@ -9,7 +9,7 @@ function equals(a: Uint8Array, b: Uint8Array) {
 }
 
 test("SHA-1", async () => {
-  initSyncBundledOnce()
+  await initBundledOnce()
 
   const hello = new TextEncoder().encode("Hello World")
 
@@ -19,16 +19,16 @@ test("SHA-1", async () => {
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest = hasher.finalize()
-  const digest2 = hasher2.finalize()
+  const digest = hasher.finalize().bytes.slice()
+  const digest2 = hasher2.finalize().bytes.slice()
 
   assert(equals(digest, digest2), `digests should be equal`)
 
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest3 = hasher.finalize()
-  const digest4 = hasher2.finalize()
+  const digest3 = hasher.finalize().bytes.slice()
+  const digest4 = hasher2.finalize().bytes.slice()
 
   assert(equals(digest3, digest4), `digests should be equal`)
 })
