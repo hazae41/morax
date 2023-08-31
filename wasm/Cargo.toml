@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = ["hazae41 <hazae41@proton.me>"]
 edition = "2021"
 
-description = "WebAssembly port of various hashing algorithms"
+description = "WebAssembly port of SHA-1, Keccak-256, and CRC-32 hashing algorithms"
 repository = "https://github.com/hazae41/morax-wasm"
 license = "Unlicense"
 

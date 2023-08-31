@@ -5,7 +5,7 @@
 
 # Morax
 
-WebAssembly port of various hashing algorithms
+WebAssembly port of SHA-1, Keccak-256, and CRC-32 hashing algorithms
 
 ```bash
 npm i @hazae41/morax

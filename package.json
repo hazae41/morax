@@ -2,7 +2,7 @@
   "type": "module",
   "name": "@hazae41/morax",
   "version": "1.0.24",
-  "description": "WebAssembly port of various hashing algorithms",
+  "description": "WebAssembly port of SHA-1, Keccak-256, and CRC-32 hashing algorithms",
   "homepage": "https://github.com/hazae41/morax",
   "repository": "github:hazae41/morax",
   "author": "hazae41",
