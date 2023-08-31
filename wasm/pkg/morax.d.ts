@@ -119,4 +119,6 @@ export class Slice {
 
   get bytes(): Uint8Array
 
+  free(): void
+
 }

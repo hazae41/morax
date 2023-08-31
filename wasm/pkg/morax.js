@@ -52,7 +52,7 @@ export function keccak256(data) {
         wasm.keccak256(retptr, ptr0, len0);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice((r0 >>> 0) / 1, r1);
+        var v2 = new Slice(r0, r1);
         
         return v2;
     } finally {
@@ -72,7 +72,7 @@ export function sha1(data) {
         wasm.sha1(retptr, ptr0, len0);
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice((r0 >>> 0) / 1, r1);
+        var v2 = new Slice(r0, r1);
         
         return v2;
     } finally {
@@ -182,7 +182,7 @@ export class Keccak256Hasher {
             wasm.keccak256hasher_finalize(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = new Slice((r0 >>> 0) / 1, r1);
+            var v1 = new Slice(r0, r1);
             
             return v1;
         } finally {
@@ -236,7 +236,7 @@ export class Sha1Hasher {
             wasm.sha1hasher_finalize(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = new Slice((r0 >>> 0) / 1, r1);
+            var v1 = new Slice(r0, r1);
             
             return v1;
         } finally {
@@ -347,13 +347,22 @@ export class Slice {
   constructor(ptr, len) {
     this.ptr = ptr
     this.len = len
+    this.start = (ptr >>> 0) / 1
+    this.end = this.start + len
   }
 
   /**
    * @returns {Uint8Array}
    */
   get bytes() {
-    return getUint8Memory0().subarray(this.ptr, this.ptr + this.len)
+    return getUint8Memory0().subarray(this.start, this.end)
+  }
+
+  /**
+   * @returns {void}
+   **/
+  free() {
+    wasm.__wbindgen_free(this.ptr, this.len * 1);
   }
 
 }
