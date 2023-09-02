@@ -12,7 +12,7 @@ const data = crypto.getRandomValues(new Uint8Array(1024))
 console.log("Keccak-256")
 
 const resultWasm = benchSync("Morax", () => {
-  keccak256(data)
+  keccak256(data).free()
 }, { samples })
 
 const resultNoble = benchSync("npm:@noble/hashes", () => {

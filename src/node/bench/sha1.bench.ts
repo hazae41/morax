@@ -6,14 +6,14 @@ import { cpus } from "os";
 
 await initBundledOnce()
 
-const samples = 1000
+const samples = 10_000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 
 console.log("SHA-1")
 
 const resultWasm = benchSync("Morax", () => {
-  sha1(data)
+  sha1(data).free()
 }, { samples })
 
 const resultWebCrypto = await bench("WebCrypto", async () => {

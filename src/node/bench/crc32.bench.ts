@@ -6,7 +6,7 @@ import { cpus } from "os"
 
 await initBundledOnce()
 
-const samples = 1000
+const samples = 10_000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 

@@ -6,16 +6,15 @@ import { cpus } from "os";
 
 await initBundledOnce()
 
-const samples = 1000
+const samples = 10_000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
 
 console.log("Keccak-256")
 
 const resultWasm = benchSync("Morax", () => {
-  keccak256(data)
+  keccak256(data).free()
 }, { samples })
-
 
 const resultNoble = benchSync("npm:@noble/hashes", () => {
   keccak_256(data)
