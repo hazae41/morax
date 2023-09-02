@@ -214,6 +214,8 @@ const digest2 = hasher.finalize().copy()
 // digest !== digest2
 console.log(digest)
 console.log(digest2)
+
+hasher.free()
 ```
 
 ### Keccak-256 (incremental)
@@ -245,6 +247,8 @@ const digest2 = hasher.finalize().copy()
 // digest !== digest2
 console.log(digest)
 console.log(digest2)
+
+hasher.free()
 ```
 
 ### CRC32 (incremental)
@@ -276,6 +280,8 @@ const checksum2 = hasher.finalize()
 // checksum !== checksum2
 console.log(checksum)
 console.log(checksum2)
+
+hasher.free()
 ```
 
 ## Building

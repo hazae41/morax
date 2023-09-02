@@ -18,6 +18,11 @@ export function crc32(data: Uint8Array): number;
 /**
 */
 export class Crc32Hasher {
+
+  [Symbol.dispose](): void
+
+  dispose(): void
+
   free(): void;
 /**
 */
@@ -34,6 +39,11 @@ export class Crc32Hasher {
 /**
 */
 export class Keccak256Hasher {
+
+  [Symbol.dispose](): void
+
+  dispose(): void
+
   free(): void;
 /**
 */
@@ -50,6 +60,11 @@ export class Keccak256Hasher {
 /**
 */
 export class Sha1Hasher {
+
+  [Symbol.dispose](): void
+
+  dispose(): void
+
   free(): void;
 /**
 */

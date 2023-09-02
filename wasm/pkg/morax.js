@@ -110,7 +110,16 @@ export class Crc32Hasher {
         return ptr;
     }
 
-    free() {
+  
+  [Symbol.dispose]() {
+    this.free()
+  }
+
+  dispose() {
+    this.free()
+  }
+
+  free() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_crc32hasher_free(ptr);
     }
@@ -155,7 +164,16 @@ export class Keccak256Hasher {
         return ptr;
     }
 
-    free() {
+  
+  [Symbol.dispose]() {
+    this.free()
+  }
+
+  dispose() {
+    this.free()
+  }
+
+  free() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_keccak256hasher_free(ptr);
     }
@@ -209,7 +227,16 @@ export class Sha1Hasher {
         return ptr;
     }
 
-    free() {
+  
+  [Symbol.dispose]() {
+    this.free()
+  }
+
+  dispose() {
+    this.free()
+  }
+
+  free() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_sha1hasher_free(ptr);
     }
