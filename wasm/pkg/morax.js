@@ -53,7 +53,7 @@ export function keccak256(data) {
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         var v2 = new Slice(r0, r1);
-        
+        ;
         return v2;
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
@@ -73,7 +73,7 @@ export function sha1(data) {
         var r0 = getInt32Memory0()[retptr / 4 + 0];
         var r1 = getInt32Memory0()[retptr / 4 + 1];
         var v2 = new Slice(r0, r1);
-        
+        ;
         return v2;
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
@@ -183,7 +183,7 @@ export class Keccak256Hasher {
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var v1 = new Slice(r0, r1);
-            
+            ;
             return v1;
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
@@ -237,7 +237,7 @@ export class Sha1Hasher {
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var v1 = new Slice(r0, r1);
-            
+            ;
             return v1;
         } finally {
             wasm.__wbindgen_add_to_stack_pointer(16);
@@ -343,7 +343,7 @@ export class Slice {
   /**
    * @param {number} ptr 
    * @param {number} len 
-   */
+   **/
   constructor(ptr, len) {
     this.ptr = ptr
     this.len = len
@@ -353,7 +353,7 @@ export class Slice {
 
   /**
    * @returns {Uint8Array}
-   */
+   **/
   get bytes() {
     return getUint8Memory0().subarray(this.start, this.end)
   }
@@ -363,6 +363,29 @@ export class Slice {
    **/
   free() {
     wasm.__wbindgen_free(this.ptr, this.len * 1);
+  }
+
+  /**
+   * @returns {Uint8Array}
+   **/
+  copy() {
+    const bytes = this.bytes.slice()
+    this.free()
+    return bytes
+  }
+
+  /**
+   * @returns {void}
+   **/
+  [Symbol.dispose]() {
+    this.free()
+  }
+
+  /**
+   * @returns {void}
+   **/
+  dispose() {
+    this.free()
   }
 
 }

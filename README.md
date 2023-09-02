@@ -152,7 +152,7 @@ Morax.initSyncBundledOnce()
 const hello = new TextEncoder().encode("Hello World")
 
 // Grab the digest (20 bytes)
-const digest = sha1(hello).bytes.slice()
+const digest = sha1(hello).copy()
 ```
 
 ### Keccak-256 (direct)
@@ -167,7 +167,7 @@ Morax.initSyncBundledOnce()
 const hello = new TextEncoder().encode("Hello World")
 
 // Grab the digest (32 bytes)
-const digest = keccak256(hello).bytes.slice()
+const digest = keccak256(hello).copy()
 ```
 
 ### CRC32 (direct)
@@ -203,13 +203,13 @@ const hello = new TextEncoder().encode("Hello World")
 hasher.update(hello)
 
 // Grab the digest (20 bytes)
-const digest = hasher.finalize().bytes.slice()
+const digest = hasher.finalize().copy()
 
 // Update the hash another time
 hasher.update(hello)
 
 // Grab the digest (20 bytes)
-const digest2 = hasher.finalize().bytes.slice()
+const digest2 = hasher.finalize().copy()
 
 // digest !== digest2
 console.log(digest)
@@ -234,13 +234,13 @@ const hello = new TextEncoder().encode("Hello World")
 hasher.update(hello)
 
 // Grab the digest (32 bytes)
-const digest = hasher.finalize().bytes.slice()
+const digest = hasher.finalize().copy()
 
 // Update the hash another time
 hasher.update(hello)
 
 // Grab the digest (32 bytes)
-const digest2 = hasher.finalize().bytes.slice()
+const digest2 = hasher.finalize().copy()
 
 // digest !== digest2
 console.log(digest)

@@ -117,8 +117,29 @@ export class Slice {
 
   constructor(ptr: number, len: number);
 
+  /**
+   * Get the bytes in memory
+   **/
   get bytes(): Uint8Array
 
+  /**
+   * Free the bytes
+   **/
   free(): void
+
+  /**
+   * Copy the bytes and free them
+   **/
+  copy(): Uint8Array
+
+  /**
+   * Free the bytes
+   **/
+  [Symbol.dispose](): void
+
+  /**
+   * Free the bytes
+   **/
+  dispose(): void
 
 }

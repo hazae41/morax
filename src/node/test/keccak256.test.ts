@@ -19,16 +19,16 @@ test("keccak256", async () => {
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest = hasher.finalize().bytes.slice()
-  const digest2 = hasher2.finalize().bytes.slice()
+  const digest = hasher.finalize().copy()
+  const digest2 = hasher2.finalize().copy()
 
   assert(equals(digest, digest2), `digests should be equal`)
 
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest3 = hasher.finalize().bytes.slice()
-  const digest4 = hasher2.finalize().bytes.slice()
+  const digest3 = hasher.finalize().copy()
+  const digest4 = hasher2.finalize().copy()
 
   assert(equals(digest3, digest4), `digests should be equal`)
 })
