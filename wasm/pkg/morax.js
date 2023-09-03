@@ -115,10 +115,6 @@ export class Crc32Hasher {
     this.free()
   }
 
-  dispose() {
-    this.free()
-  }
-
   free() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_crc32hasher_free(ptr);
@@ -166,10 +162,6 @@ export class Keccak256Hasher {
 
   
   [Symbol.dispose]() {
-    this.free()
-  }
-
-  dispose() {
     this.free()
   }
 
@@ -229,10 +221,6 @@ export class Sha1Hasher {
 
   
   [Symbol.dispose]() {
-    this.free()
-  }
-
-  dispose() {
     this.free()
   }
 
@@ -405,13 +393,6 @@ export class Slice {
    * @returns {void}
    **/
   [Symbol.dispose]() {
-    this.free()
-  }
-
-  /**
-   * @returns {void}
-   **/
-  dispose() {
     this.free()
   }
 

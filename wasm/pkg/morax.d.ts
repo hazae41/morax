@@ -21,8 +21,6 @@ export class Crc32Hasher {
 
   [Symbol.dispose](): void
 
-  dispose(): void
-
   free(): void;
 /**
 */
@@ -42,8 +40,6 @@ export class Keccak256Hasher {
 
   [Symbol.dispose](): void
 
-  dispose(): void
-
   free(): void;
 /**
 */
@@ -62,8 +58,6 @@ export class Keccak256Hasher {
 export class Sha1Hasher {
 
   [Symbol.dispose](): void
-
-  dispose(): void
 
   free(): void;
 /**
@@ -151,10 +145,5 @@ export class Slice {
    * Free the bytes
    **/
   [Symbol.dispose](): void
-
-  /**
-   * Free the bytes
-   **/
-  dispose(): void
 
 }
