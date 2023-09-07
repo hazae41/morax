@@ -95,6 +95,26 @@ export function crc32(data) {
 }
 
 /**
+* @param {Uint8Array} data
+* @returns {Slice}
+*/
+export function sha256(data) {
+    try {
+        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.sha256(retptr, ptr0, len0);
+        var r0 = getInt32Memory0()[retptr / 4 + 0];
+        var r1 = getInt32Memory0()[retptr / 4 + 1];
+        var v2 = new Slice(r0, r1);
+        ;
+        return v2;
+    } finally {
+        wasm.__wbindgen_add_to_stack_pointer(16);
+    }
+}
+
+/**
 */
 export class Crc32Hasher {
 
@@ -252,6 +272,65 @@ export class Sha1Hasher {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
             wasm.sha1hasher_finalize(retptr, this.__wbg_ptr);
+            var r0 = getInt32Memory0()[retptr / 4 + 0];
+            var r1 = getInt32Memory0()[retptr / 4 + 1];
+            var v1 = new Slice(r0, r1);
+            ;
+            return v1;
+        } finally {
+            wasm.__wbindgen_add_to_stack_pointer(16);
+        }
+    }
+}
+/**
+*/
+export class Sha256Hasher {
+
+    static __wrap(ptr) {
+        ptr = ptr >>> 0;
+        const obj = Object.create(Sha256Hasher.prototype);
+        obj.__wbg_ptr = ptr;
+
+        return obj;
+    }
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+
+        return ptr;
+    }
+
+  
+  [Symbol.dispose]() {
+    this.free()
+  }
+
+  free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_sha256hasher_free(ptr);
+    }
+    /**
+    */
+    constructor() {
+        const ret = wasm.sha256hasher_new();
+        return Sha256Hasher.__wrap(ret);
+    }
+    /**
+    * @param {Uint8Array} data
+    */
+    update(data) {
+        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.sha256hasher_update(this.__wbg_ptr, ptr0, len0);
+    }
+    /**
+    * @returns {Slice}
+    */
+    finalize() {
+        try {
+            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+            wasm.sha256hasher_finalize(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var v1 = new Slice(r0, r1);

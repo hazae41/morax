@@ -5,7 +5,7 @@
 
 # Morax
 
-WebAssembly port of SHA-1, Keccak-256, and CRC-32 hashing algorithms
+WebAssembly port of SHA-1, SHA-256, Keccak-256, and CRC-32 hashing algorithms
 
 ```bash
 npm i @hazae41/morax
@@ -140,34 +140,19 @@ Summary
 
 ## Usage
 
-### SHA-1 (direct)
+### SHA-1 / SHA-256 / Keccak-256 (direct)
 
 ```ts
 import { Morax, sha1 } from "@hazae41/morax";
 
 // Wait for WASM to load
-Morax.initSyncBundledOnce()
+await Morax.initBundledOnce()
 
 // Data to be hashed
 const hello = new TextEncoder().encode("Hello World")
 
-// Grab the digest (20 bytes)
+// Grab the digest (Uint8Array)
 const digest = sha1(hello).copy()
-```
-
-### Keccak-256 (direct)
-
-```ts
-import { Morax, keccak256 } from "@hazae41/morax";
-
-// Wait for WASM to load
-Morax.initSyncBundledOnce()
-
-// Data to be hashed
-const hello = new TextEncoder().encode("Hello World")
-
-// Grab the digest (32 bytes)
-const digest = keccak256(hello).copy()
 ```
 
 ### CRC32 (direct)
@@ -176,7 +161,7 @@ const digest = keccak256(hello).copy()
 import { Morax, crc32 } from "@hazae41/morax";
 
 // Wait for WASM to load
-Morax.initSyncBundledOnce()
+await Morax.initBundledOnce()
 
 // Data to be hashed
 const hello = new TextEncoder().encode("Hello World")
@@ -185,13 +170,13 @@ const hello = new TextEncoder().encode("Hello World")
 const digest = crc32(hello)
 ```
 
-### SHA-1 (incremental)
+### SHA-1 / SHA-256 / Keccak-256 (incremental)
 
 ```ts
 import { Morax, Sha1Hasher } from "@hazae41/morax";
 
 // Wait for WASM to load
-Morax.initSyncBundledOnce()
+await Morax.initBundledOnce()
 
 // Create a hash
 const hasher = new Sha1Hasher()
@@ -202,46 +187,13 @@ const hello = new TextEncoder().encode("Hello World")
 // Update the hash with your data
 hasher.update(hello)
 
-// Grab the digest (20 bytes)
+// Grab the digest (Uint8Array)
 const digest = hasher.finalize().copy()
 
 // Update the hash another time
 hasher.update(hello)
 
-// Grab the digest (20 bytes)
-const digest2 = hasher.finalize().copy()
-
-// digest !== digest2
-console.log(digest)
-console.log(digest2)
-
-hasher.free()
-```
-
-### Keccak-256 (incremental)
-
-```ts
-import { Morax, Keccak256Hasher } from "@hazae41/morax";
-
-// Wait for WASM to load
-Morax.initSyncBundledOnce()
-
-// Create a hash
-const hasher = new Keccak256Hasher()
-
-// Data to be hashed
-const hello = new TextEncoder().encode("Hello World")
-
-// Update the hash with your data
-hasher.update(hello)
-
-// Grab the digest (32 bytes)
-const digest = hasher.finalize().copy()
-
-// Update the hash another time
-hasher.update(hello)
-
-// Grab the digest (32 bytes)
+// Grab the digest (Uint8Array)
 const digest2 = hasher.finalize().copy()
 
 // digest !== digest2
@@ -257,7 +209,7 @@ hasher.free()
 import { Morax, Crc32Hasher } from "@hazae41/morax";
 
 // Wait for WASM to load
-Morax.initSyncBundledOnce()
+await Morax.initBundledOnce()
 
 // Create a hash
 const hasher = new Crc32Hasher()

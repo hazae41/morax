@@ -20,6 +20,11 @@ export function sha1(data: Uint8Array): Slice;
 */
 export function crc32(data: Uint8Array): number;
 /**
+* @param {Uint8Array} data
+* @returns {Slice}
+*/
+export function sha256(data: Uint8Array): Slice;
+/**
 */
 export class Crc32Hasher {
 
@@ -76,6 +81,25 @@ export class Sha1Hasher {
 */
   finalize(): Slice;
 }
+/**
+*/
+export class Sha256Hasher {
+
+  [Symbol.dispose](): void
+
+  free(): void;
+/**
+*/
+  constructor();
+/**
+* @param {Uint8Array} data
+*/
+  update(data: Uint8Array): void;
+/**
+* @returns {Slice}
+*/
+  finalize(): Slice;
+}
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
@@ -94,8 +118,13 @@ export interface InitOutput {
   readonly crc32hasher_new: () => number;
   readonly crc32hasher_update: (a: number, b: number, c: number) => void;
   readonly crc32hasher_finalize: (a: number) => number;
+  readonly sha256: (a: number, b: number, c: number) => void;
+  readonly sha256hasher_new: () => number;
+  readonly sha256hasher_update: (a: number, b: number, c: number) => void;
+  readonly sha256hasher_finalize: (a: number, b: number) => void;
   readonly __wbg_sha1hasher_free: (a: number) => void;
   readonly __wbg_keccak256hasher_free: (a: number) => void;
+  readonly __wbg_sha256hasher_free: (a: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;
