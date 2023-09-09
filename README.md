@@ -152,7 +152,7 @@ await Morax.initBundledOnce()
 const hello = new TextEncoder().encode("Hello World")
 
 // Grab the digest (Uint8Array)
-const digest = sha1(hello).copy()
+const digest = sha1(hello).copyAndDispose()
 ```
 
 ### CRC32 (direct)
@@ -188,13 +188,13 @@ const hello = new TextEncoder().encode("Hello World")
 hasher.update(hello)
 
 // Grab the digest (Uint8Array)
-const digest = hasher.finalize().copy()
+const digest = hasher.finalize().copyAndDispose()
 
 // Update the hash another time
 hasher.update(hello)
 
 // Grab the digest (Uint8Array)
-const digest2 = hasher.finalize().copy()
+const digest2 = hasher.finalize().copyAndDispose()
 
 // digest !== digest2
 console.log(digest)

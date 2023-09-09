@@ -21,16 +21,16 @@ test("SHA-1", async () => {
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest = hasher.finalize().copy()
-  const digest2 = hasher2.finalize().copy()
+  const digest = hasher.finalize().copyAndDispose()
+  const digest2 = hasher2.finalize().copyAndDispose()
 
   assert(equals(digest, digest2), `digests should be equal`)
 
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest3 = hasher.finalize().copy()
-  const digest4 = hasher2.finalize().copy()
+  const digest3 = hasher.finalize().copyAndDispose()
+  const digest4 = hasher2.finalize().copyAndDispose()
 
   assert(equals(digest3, digest4), `digests should be equal`)
 })
@@ -71,16 +71,16 @@ test("keccak256", async () => {
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest = hasher.finalize().copy()
-  const digest2 = hasher2.finalize().copy()
+  const digest = hasher.finalize().copyAndDispose()
+  const digest2 = hasher2.finalize().copyAndDispose()
 
   assert(equals(digest, digest2), `digests should be equal`)
 
   hasher.update(hello)
   hasher2.update(hello)
 
-  const digest3 = hasher.finalize().copy()
-  const digest4 = hasher2.finalize().copy()
+  const digest3 = hasher.finalize().copyAndDispose()
+  const digest4 = hasher2.finalize().copyAndDispose()
 
   assert(equals(digest3, digest4), `digests should be equal`)
 })
