@@ -15,7 +15,9 @@ npm i @hazae41/morax
 
 ## Algorithms
 - Incremental SHA-1 from RustCrypto (sha1)
+- Incremental SHA-256 from RustCrypto (sha2)
 - Incremental Keccak-256 from RustCrypto (sha3)
+- Incremental RIPEMD-160 from RustCrypto (ripemd)
 - Incremental CRC-32 from Sam Rijs (crc32fast)
 
 ## Features
@@ -140,7 +142,7 @@ Summary
 
 ## Usage
 
-### SHA-1 / SHA-256 / Keccak-256 (direct)
+### SHA-1 / SHA-256 / Keccak-256 / RIPEMD-160 (direct)
 
 ```ts
 import { Morax, sha1 } from "@hazae41/morax";
@@ -170,7 +172,7 @@ const hello = new TextEncoder().encode("Hello World")
 const digest = crc32(hello)
 ```
 
-### SHA-1 / SHA-256 / Keccak-256 (incremental)
+### SHA-1 / SHA-256 / Keccak-256 / RIPEMD-160 (incremental)
 
 ```ts
 import { Morax, Sha1Hasher } from "@hazae41/morax";
