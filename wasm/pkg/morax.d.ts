@@ -13,11 +13,6 @@ export function keccak256(data: Uint8Array): Slice;
 * @param {Uint8Array} data
 * @returns {Slice}
 */
-export function sha1(data: Uint8Array): Slice;
-/**
-* @param {Uint8Array} data
-* @returns {Slice}
-*/
 export function ripemd160(data: Uint8Array): Slice;
 /**
 * @param {Uint8Array} data
@@ -29,6 +24,11 @@ export function sha256(data: Uint8Array): Slice;
 * @returns {number}
 */
 export function crc32(data: Uint8Array): number;
+/**
+* @param {Uint8Array} data
+* @returns {Slice}
+*/
+export function sha1(data: Uint8Array): Slice;
 /**
 */
 export class Crc32Hasher {
@@ -133,10 +133,6 @@ export interface InitOutput {
   readonly keccak256hasher_new: () => number;
   readonly keccak256hasher_update: (a: number, b: number, c: number) => void;
   readonly keccak256hasher_finalize: (a: number, b: number) => void;
-  readonly sha1: (a: number, b: number, c: number) => void;
-  readonly sha1hasher_new: () => number;
-  readonly sha1hasher_update: (a: number, b: number, c: number) => void;
-  readonly sha1hasher_finalize: (a: number, b: number) => void;
   readonly ripemd160: (a: number, b: number, c: number) => void;
   readonly ripemd160hasher_new: () => number;
   readonly ripemd160hasher_update: (a: number, b: number, c: number) => void;
@@ -150,10 +146,14 @@ export interface InitOutput {
   readonly crc32hasher_new: () => number;
   readonly crc32hasher_update: (a: number, b: number, c: number) => void;
   readonly crc32hasher_finalize: (a: number) => number;
-  readonly __wbg_sha1hasher_free: (a: number) => void;
+  readonly sha1: (a: number, b: number, c: number) => void;
+  readonly sha1hasher_new: () => number;
+  readonly sha1hasher_update: (a: number, b: number, c: number) => void;
+  readonly sha1hasher_finalize: (a: number, b: number) => void;
   readonly __wbg_ripemd160hasher_free: (a: number) => void;
   readonly __wbg_sha256hasher_free: (a: number) => void;
   readonly __wbg_keccak256hasher_free: (a: number) => void;
+  readonly __wbg_sha1hasher_free: (a: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;

@@ -67,26 +67,6 @@ export function keccak256(data) {
 * @param {Uint8Array} data
 * @returns {Slice}
 */
-export function sha1(data) {
-    try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.sha1(retptr, ptr0, len0);
-        var r0 = getInt32Memory0()[retptr / 4 + 0];
-        var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice(r0, r1);
-        ;
-        return v2;
-    } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-    }
-}
-
-/**
-* @param {Uint8Array} data
-* @returns {Slice}
-*/
 export function ripemd160(data) {
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
@@ -132,6 +112,26 @@ export function crc32(data) {
     const len0 = WASM_VECTOR_LEN;
     const ret = wasm.crc32(ptr0, len0);
     return ret >>> 0;
+}
+
+/**
+* @param {Uint8Array} data
+* @returns {Slice}
+*/
+export function sha1(data) {
+    try {
+        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.sha1(retptr, ptr0, len0);
+        var r0 = getInt32Memory0()[retptr / 4 + 0];
+        var r1 = getInt32Memory0()[retptr / 4 + 1];
+        var v2 = new Slice(r0, r1);
+        ;
+        return v2;
+    } finally {
+        wasm.__wbindgen_add_to_stack_pointer(16);
+    }
 }
 
 /**
