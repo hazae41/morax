@@ -16,14 +16,19 @@ export function keccak256(data: Uint8Array): Slice;
 export function sha1(data: Uint8Array): Slice;
 /**
 * @param {Uint8Array} data
-* @returns {number}
+* @returns {Slice}
 */
-export function crc32(data: Uint8Array): number;
+export function ripemd160(data: Uint8Array): Slice;
 /**
 * @param {Uint8Array} data
 * @returns {Slice}
 */
 export function sha256(data: Uint8Array): Slice;
+/**
+* @param {Uint8Array} data
+* @returns {number}
+*/
+export function crc32(data: Uint8Array): number;
 /**
 */
 export class Crc32Hasher {
@@ -46,6 +51,25 @@ export class Crc32Hasher {
 /**
 */
 export class Keccak256Hasher {
+
+  [Symbol.dispose](): void
+
+  free(): void;
+/**
+*/
+  constructor();
+/**
+* @param {Uint8Array} data
+*/
+  update(data: Uint8Array): void;
+/**
+* @returns {Slice}
+*/
+  finalize(): Slice;
+}
+/**
+*/
+export class Ripemd160Hasher {
 
   [Symbol.dispose](): void
 
@@ -113,18 +137,23 @@ export interface InitOutput {
   readonly sha1hasher_new: () => number;
   readonly sha1hasher_update: (a: number, b: number, c: number) => void;
   readonly sha1hasher_finalize: (a: number, b: number) => void;
+  readonly ripemd160: (a: number, b: number, c: number) => void;
+  readonly ripemd160hasher_new: () => number;
+  readonly ripemd160hasher_update: (a: number, b: number, c: number) => void;
+  readonly ripemd160hasher_finalize: (a: number, b: number) => void;
+  readonly sha256: (a: number, b: number, c: number) => void;
+  readonly sha256hasher_new: () => number;
+  readonly sha256hasher_update: (a: number, b: number, c: number) => void;
+  readonly sha256hasher_finalize: (a: number, b: number) => void;
   readonly crc32: (a: number, b: number) => number;
   readonly __wbg_crc32hasher_free: (a: number) => void;
   readonly crc32hasher_new: () => number;
   readonly crc32hasher_update: (a: number, b: number, c: number) => void;
   readonly crc32hasher_finalize: (a: number) => number;
-  readonly sha256: (a: number, b: number, c: number) => void;
-  readonly sha256hasher_new: () => number;
-  readonly sha256hasher_update: (a: number, b: number, c: number) => void;
-  readonly sha256hasher_finalize: (a: number, b: number) => void;
   readonly __wbg_sha1hasher_free: (a: number) => void;
-  readonly __wbg_keccak256hasher_free: (a: number) => void;
+  readonly __wbg_ripemd160hasher_free: (a: number) => void;
   readonly __wbg_sha256hasher_free: (a: number) => void;
+  readonly __wbg_keccak256hasher_free: (a: number) => void;
   readonly __wbindgen_add_to_stack_pointer: (a: number) => number;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_free: (a: number, b: number, c: number) => void;

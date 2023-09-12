@@ -85,13 +85,22 @@ export function sha1(data) {
 
 /**
 * @param {Uint8Array} data
-* @returns {number}
+* @returns {Slice}
 */
-export function crc32(data) {
-    const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-    const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.crc32(ptr0, len0);
-    return ret >>> 0;
+export function ripemd160(data) {
+    try {
+        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.ripemd160(retptr, ptr0, len0);
+        var r0 = getInt32Memory0()[retptr / 4 + 0];
+        var r1 = getInt32Memory0()[retptr / 4 + 1];
+        var v2 = new Slice(r0, r1);
+        ;
+        return v2;
+    } finally {
+        wasm.__wbindgen_add_to_stack_pointer(16);
+    }
 }
 
 /**
@@ -112,6 +121,17 @@ export function sha256(data) {
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
     }
+}
+
+/**
+* @param {Uint8Array} data
+* @returns {number}
+*/
+export function crc32(data) {
+    const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+    const len0 = WASM_VECTOR_LEN;
+    const ret = wasm.crc32(ptr0, len0);
+    return ret >>> 0;
 }
 
 /**
@@ -213,6 +233,65 @@ export class Keccak256Hasher {
         try {
             const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
             wasm.keccak256hasher_finalize(retptr, this.__wbg_ptr);
+            var r0 = getInt32Memory0()[retptr / 4 + 0];
+            var r1 = getInt32Memory0()[retptr / 4 + 1];
+            var v1 = new Slice(r0, r1);
+            ;
+            return v1;
+        } finally {
+            wasm.__wbindgen_add_to_stack_pointer(16);
+        }
+    }
+}
+/**
+*/
+export class Ripemd160Hasher {
+
+    static __wrap(ptr) {
+        ptr = ptr >>> 0;
+        const obj = Object.create(Ripemd160Hasher.prototype);
+        obj.__wbg_ptr = ptr;
+
+        return obj;
+    }
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+
+        return ptr;
+    }
+
+  
+  [Symbol.dispose]() {
+    this.free()
+  }
+
+  free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_ripemd160hasher_free(ptr);
+    }
+    /**
+    */
+    constructor() {
+        const ret = wasm.ripemd160hasher_new();
+        return Ripemd160Hasher.__wrap(ret);
+    }
+    /**
+    * @param {Uint8Array} data
+    */
+    update(data) {
+        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        wasm.ripemd160hasher_update(this.__wbg_ptr, ptr0, len0);
+    }
+    /**
+    * @returns {Slice}
+    */
+    finalize() {
+        try {
+            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
+            wasm.ripemd160hasher_finalize(retptr, this.__wbg_ptr);
             var r0 = getInt32Memory0()[retptr / 4 + 0];
             var r1 = getInt32Memory0()[retptr / 4 + 1];
             var v1 = new Slice(r0, r1);
