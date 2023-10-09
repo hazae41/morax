@@ -1,3 +1,4 @@
+import { Box, Copied } from "@hazae41/box"
 import { bench } from "@hazae41/deimos"
 import CRC32 from "crc-32"
 import crypto from "crypto"
@@ -9,11 +10,12 @@ await initBundledOnce()
 const samples = 10_000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
+const box = new Box(new Copied(data))
 
 console.log("CRC32")
 
 const resultWasm = await bench(`Morax`, async () => {
-  crc32(data)
+  crc32(box)
 }, { samples })
 
 const resultJs = await bench(`npm:crc-32`, async () => {

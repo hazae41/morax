@@ -1,3 +1,4 @@
+import { Box, Copied } from "@hazae41/box"
 import { assert, test } from "@hazae41/phobos"
 import { Sha1Hasher, initBundledOnce } from "mods/index.js"
 
@@ -16,19 +17,19 @@ test("SHA-1", async () => {
   const hasher = new Sha1Hasher()
   const hasher2 = new Sha1Hasher()
 
-  hasher.update(hello)
-  hasher2.update(hello)
+  hasher.update(new Box(new Copied(hello)))
+  hasher2.update(new Box(new Copied(hello)))
 
-  const digest = hasher.finalize().copyAndDispose()
-  const digest2 = hasher2.finalize().copyAndDispose()
+  const digest = hasher.finalize().copyAndDispose().bytes
+  const digest2 = hasher2.finalize().copyAndDispose().bytes
 
   assert(equals(digest, digest2), `digests should be equal`)
 
-  hasher.update(hello)
-  hasher2.update(hello)
+  hasher.update(new Box(new Copied(hello)))
+  hasher2.update(new Box(new Copied(hello)))
 
-  const digest3 = hasher.finalize().copyAndDispose()
-  const digest4 = hasher2.finalize().copyAndDispose()
+  const digest3 = hasher.finalize().copyAndDispose().bytes
+  const digest4 = hasher2.finalize().copyAndDispose().bytes
 
   assert(equals(digest3, digest4), `digests should be equal`)
 })

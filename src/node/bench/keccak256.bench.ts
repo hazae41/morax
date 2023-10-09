@@ -1,3 +1,4 @@
+import { Box, Copied } from "@hazae41/box";
 import { benchSync } from "@hazae41/deimos";
 import { keccak_256 } from '@noble/hashes/sha3';
 import crypto from "crypto";
@@ -9,11 +10,12 @@ await initBundledOnce()
 const samples = 10_000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
+const box = new Box(new Copied(data))
 
 console.log("Keccak-256")
 
 const resultWasm = benchSync("Morax", () => {
-  keccak256(data).free()
+  keccak256(box).free()
 }, { samples })
 
 const resultNoble = benchSync("npm:@noble/hashes", () => {
