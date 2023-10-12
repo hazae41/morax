@@ -1,16 +1,18 @@
 extern crate alloc;
 
-use alloc::{boxed::Box, vec::Vec};
+use alloc::boxed::Box;
 
 use wasm_bindgen::prelude::*;
 
+use crate::Memory;
+
 #[wasm_bindgen]
-pub fn ripemd160(data: &[u8]) -> Vec<u8> {
+pub fn ripemd160(data: &Memory) -> Memory {
     use ripemd::Digest;
 
     let mut hasher = ripemd::Ripemd160::new();
-    hasher.update(data);
-    hasher.finalize().to_vec()
+    hasher.update(&data.inner);
+    Memory::new(hasher.finalize().to_vec())
 }
 
 #[wasm_bindgen]
@@ -31,16 +33,16 @@ impl Ripemd160Hasher {
     }
 
     #[wasm_bindgen]
-    pub fn update(&mut self, data: &[u8]) {
+    pub fn update(&mut self, data: &Memory) {
         use ripemd::digest::Update;
 
-        self.inner.update(data);
+        self.inner.update(&data.inner);
     }
 
     #[wasm_bindgen]
-    pub fn finalize(&self) -> Vec<u8> {
+    pub fn finalize(&self) -> Memory {
         use ripemd::Digest;
 
-        self.inner.clone().finalize().to_vec()
+        Memory::new(self.inner.clone().finalize().to_vec())
     }
 }

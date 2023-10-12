@@ -4,10 +4,12 @@ use alloc::boxed::Box;
 
 use wasm_bindgen::prelude::*;
 
+use crate::Memory;
+
 #[wasm_bindgen]
-pub fn crc32(data: &[u8]) -> u32 {
+pub fn crc32(data: &Memory) -> u32 {
     let mut hasher = crc32fast::Hasher::new();
-    hasher.update(data);
+    hasher.update(&data.inner);
     hasher.finalize()
 }
 
@@ -27,8 +29,8 @@ impl Crc32Hasher {
     }
 
     #[wasm_bindgen]
-    pub fn update(&mut self, data: &[u8]) {
-        self.inner.update(data);
+    pub fn update(&mut self, data: &Memory) {
+        self.inner.update(&data.inner);
     }
 
     #[wasm_bindgen]

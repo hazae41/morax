@@ -1,6 +1,3 @@
-
-import { Copied } from "@hazae41/box"
-
 let wasm;
 
 const cachedTextDecoder = (typeof TextDecoder !== 'undefined' ? new TextDecoder('utf-8', { ignoreBOM: true, fatal: true }) : { decode: () => { throw Error('TextDecoder not available') } } );
@@ -21,124 +18,68 @@ function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
 
-let WASM_VECTOR_LEN = 0;
-
-function passArray8ToWasm0(arg, malloc) {
-    if (getUint8Memory0().buffer === arg.inner.bytes.buffer) {
-      const bytes = arg.unwrap().bytes
-      WASM_VECTOR_LEN = bytes.byteLength;
-      return bytes.byteOffset
+function _assertClass(instance, klass) {
+    if (!(instance instanceof klass)) {
+        throw new Error(`expected instance of ${klass.name}`);
     }
-
-    const bytes = arg.get().bytes
-    const ptr = malloc(bytes.length * 1, 1) >>> 0;
-    getUint8Memory0().set(bytes, ptr / 1);
-    WASM_VECTOR_LEN = bytes.length;
-    return ptr;
-}
-
-let cachedInt32Memory0 = null;
-
-function getInt32Memory0() {
-    if (cachedInt32Memory0 === null || cachedInt32Memory0.byteLength === 0) {
-        cachedInt32Memory0 = new Int32Array(wasm.memory.buffer);
-    }
-    return cachedInt32Memory0;
-}
-
-function getArrayU8FromWasm0(ptr, len) {
-    ptr = ptr >>> 0;
-    return getUint8Memory0().subarray(ptr / 1, ptr / 1 + len);
+    return instance.ptr;
 }
 /**
-* @param {Box<Copiable>} data
-* @returns {Slice}
+* @param {Memory} data
+* @returns {Memory}
 */
 export function keccak256(data) {
-    try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.keccak256(retptr, ptr0, len0);
-        var r0 = getInt32Memory0()[retptr / 4 + 0];
-        var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice(r0, r1);
-        ;
-        return v2;
-    } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-    }
+    _assertClass(data, Memory);
+    const ret = wasm.keccak256(data.__wbg_ptr);
+    return Memory.__wrap(ret);
 }
 
 /**
-* @param {Box<Copiable>} data
-* @returns {Slice}
-*/
-export function ripemd160(data) {
-    try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.ripemd160(retptr, ptr0, len0);
-        var r0 = getInt32Memory0()[retptr / 4 + 0];
-        var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice(r0, r1);
-        ;
-        return v2;
-    } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-    }
-}
-
-/**
-* @param {Box<Copiable>} data
-* @returns {Slice}
-*/
-export function sha256(data) {
-    try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.sha256(retptr, ptr0, len0);
-        var r0 = getInt32Memory0()[retptr / 4 + 0];
-        var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice(r0, r1);
-        ;
-        return v2;
-    } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-    }
-}
-
-/**
-* @param {Box<Copiable>} data
+* @param {Memory} data
 * @returns {number}
 */
 export function crc32(data) {
-    const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-    const len0 = WASM_VECTOR_LEN;
-    const ret = wasm.crc32(ptr0, len0);
+    _assertClass(data, Memory);
+    const ret = wasm.crc32(data.__wbg_ptr);
     return ret >>> 0;
 }
 
 /**
-* @param {Box<Copiable>} data
-* @returns {Slice}
+* @param {Memory} data
+* @returns {Memory}
 */
 export function sha1(data) {
-    try {
-        const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.sha1(retptr, ptr0, len0);
-        var r0 = getInt32Memory0()[retptr / 4 + 0];
-        var r1 = getInt32Memory0()[retptr / 4 + 1];
-        var v2 = new Slice(r0, r1);
-        ;
-        return v2;
-    } finally {
-        wasm.__wbindgen_add_to_stack_pointer(16);
-    }
+    _assertClass(data, Memory);
+    const ret = wasm.sha1(data.__wbg_ptr);
+    return Memory.__wrap(ret);
+}
+
+let WASM_VECTOR_LEN = 0;
+
+function passArray8ToWasm0(arg, malloc) {
+    const ptr = malloc(arg.length * 1, 1) >>> 0;
+    getUint8Memory0().set(arg, ptr / 1);
+    WASM_VECTOR_LEN = arg.length;
+    return ptr;
+}
+/**
+* @param {Memory} data
+* @returns {Memory}
+*/
+export function ripemd160(data) {
+    _assertClass(data, Memory);
+    const ret = wasm.ripemd160(data.__wbg_ptr);
+    return Memory.__wrap(ret);
+}
+
+/**
+* @param {Memory} data
+* @returns {Memory}
+*/
+export function sha256(data) {
+    _assertClass(data, Memory);
+    const ret = wasm.sha256(data.__wbg_ptr);
+    return Memory.__wrap(ret);
 }
 
 /**
@@ -149,7 +90,6 @@ export class Crc32Hasher {
         ptr = ptr >>> 0;
         const obj = Object.create(Crc32Hasher.prototype);
         obj.__wbg_ptr = ptr;
-        obj.__wbg_freed = false;
 
         return obj;
     }
@@ -161,20 +101,11 @@ export class Crc32Hasher {
         return ptr;
     }
 
-  
-    get freed() {
-        return this.__wbg_freed
-    }
-
     [Symbol.dispose]() {
         this.free()
     }
 
     free() {
-        if (this.__wbg_freed)
-            return
-        this.__wbg_freed = true
-
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_crc32hasher_free(ptr);
     }
@@ -185,12 +116,11 @@ export class Crc32Hasher {
         return Crc32Hasher.__wrap(ret);
     }
     /**
-    * @param {Box<Copiable>} data
+    * @param {Memory} data
     */
     update(data) {
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.crc32hasher_update(this.__wbg_ptr, ptr0, len0);
+        _assertClass(data, Memory);
+        wasm.crc32hasher_update(this.__wbg_ptr, data.__wbg_ptr);
     }
     /**
     * @returns {number}
@@ -208,7 +138,6 @@ export class Keccak256Hasher {
         ptr = ptr >>> 0;
         const obj = Object.create(Keccak256Hasher.prototype);
         obj.__wbg_ptr = ptr;
-        obj.__wbg_freed = false;
 
         return obj;
     }
@@ -220,20 +149,11 @@ export class Keccak256Hasher {
         return ptr;
     }
 
-  
-    get freed() {
-        return this.__wbg_freed
-    }
-
     [Symbol.dispose]() {
         this.free()
     }
 
     free() {
-        if (this.__wbg_freed)
-            return
-        this.__wbg_freed = true
-
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_keccak256hasher_free(ptr);
     }
@@ -244,28 +164,84 @@ export class Keccak256Hasher {
         return Keccak256Hasher.__wrap(ret);
     }
     /**
-    * @param {Box<Copiable>} data
+    * @param {Memory} data
     */
     update(data) {
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.keccak256hasher_update(this.__wbg_ptr, ptr0, len0);
+        _assertClass(data, Memory);
+        wasm.keccak256hasher_update(this.__wbg_ptr, data.__wbg_ptr);
     }
     /**
-    * @returns {Slice}
+    * @returns {Memory}
     */
     finalize() {
-        try {
-            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.keccak256hasher_finalize(retptr, this.__wbg_ptr);
-            var r0 = getInt32Memory0()[retptr / 4 + 0];
-            var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = new Slice(r0, r1);
-            ;
-            return v1;
-        } finally {
-            wasm.__wbindgen_add_to_stack_pointer(16);
-        }
+        const ret = wasm.keccak256hasher_finalize(this.__wbg_ptr);
+        return Memory.__wrap(ret);
+    }
+}
+/**
+*/
+export class Memory {
+
+    static __wrap(ptr, ptr0, len0) {
+        ptr = ptr >>> 0;
+        const obj = Object.create(Memory.prototype);
+        obj.__wbg_ptr = ptr;
+        obj.__wbg_ptr0 = ptr0;
+        obj.__wbg_len0 = len0;
+
+        return obj;
+    }
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+
+        return ptr;
+    }
+
+    [Symbol.dispose]() {
+        this.free()
+    }
+
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_memory_free(ptr);
+    }
+    /**
+    * @param {Uint8Array} inner
+    */
+    constructor(inner) {
+        const ptr0 = passArray8ToWasm0(inner, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.memory_new(ptr0, len0);
+        return Memory.__wrap(ret, ptr0, len0);
+    }
+    /**
+    * @returns {number}
+    */
+    ptr() {
+        return this.__wbg_ptr0 ??= wasm.memory_ptr(this.__wbg_ptr);
+    }
+    /**
+    * @returns {number}
+    */
+    len() {
+        return this.__wbg_len0 ??= wasm.memory_len(this.__wbg_ptr);
+    }
+
+    freeNextTick() {
+        setTimeout(() => this.free(), 0);
+        return this;
+    }
+
+    get bytes() {
+        return getUint8Memory0().subarray(this.ptr(), this.ptr() + this.len());
+    }
+    
+    copyAndDispose() {
+        const bytes = this.bytes.slice();
+        this.free();
+        return bytes;
     }
 }
 /**
@@ -276,7 +252,6 @@ export class Ripemd160Hasher {
         ptr = ptr >>> 0;
         const obj = Object.create(Ripemd160Hasher.prototype);
         obj.__wbg_ptr = ptr;
-        obj.__wbg_freed = false;
 
         return obj;
     }
@@ -288,20 +263,11 @@ export class Ripemd160Hasher {
         return ptr;
     }
 
-  
-    get freed() {
-        return this.__wbg_freed
-    }
-
     [Symbol.dispose]() {
         this.free()
     }
 
     free() {
-        if (this.__wbg_freed)
-            return
-        this.__wbg_freed = true
-
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_ripemd160hasher_free(ptr);
     }
@@ -312,28 +278,18 @@ export class Ripemd160Hasher {
         return Ripemd160Hasher.__wrap(ret);
     }
     /**
-    * @param {Box<Copiable>} data
+    * @param {Memory} data
     */
     update(data) {
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.ripemd160hasher_update(this.__wbg_ptr, ptr0, len0);
+        _assertClass(data, Memory);
+        wasm.ripemd160hasher_update(this.__wbg_ptr, data.__wbg_ptr);
     }
     /**
-    * @returns {Slice}
+    * @returns {Memory}
     */
     finalize() {
-        try {
-            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.ripemd160hasher_finalize(retptr, this.__wbg_ptr);
-            var r0 = getInt32Memory0()[retptr / 4 + 0];
-            var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = new Slice(r0, r1);
-            ;
-            return v1;
-        } finally {
-            wasm.__wbindgen_add_to_stack_pointer(16);
-        }
+        const ret = wasm.ripemd160hasher_finalize(this.__wbg_ptr);
+        return Memory.__wrap(ret);
     }
 }
 /**
@@ -344,7 +300,6 @@ export class Sha1Hasher {
         ptr = ptr >>> 0;
         const obj = Object.create(Sha1Hasher.prototype);
         obj.__wbg_ptr = ptr;
-        obj.__wbg_freed = false;
 
         return obj;
     }
@@ -356,20 +311,11 @@ export class Sha1Hasher {
         return ptr;
     }
 
-  
-    get freed() {
-        return this.__wbg_freed
-    }
-
     [Symbol.dispose]() {
         this.free()
     }
 
     free() {
-        if (this.__wbg_freed)
-            return
-        this.__wbg_freed = true
-
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_sha1hasher_free(ptr);
     }
@@ -380,28 +326,18 @@ export class Sha1Hasher {
         return Sha1Hasher.__wrap(ret);
     }
     /**
-    * @param {Box<Copiable>} data
+    * @param {Memory} data
     */
     update(data) {
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.sha1hasher_update(this.__wbg_ptr, ptr0, len0);
+        _assertClass(data, Memory);
+        wasm.sha1hasher_update(this.__wbg_ptr, data.__wbg_ptr);
     }
     /**
-    * @returns {Slice}
+    * @returns {Memory}
     */
     finalize() {
-        try {
-            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.sha1hasher_finalize(retptr, this.__wbg_ptr);
-            var r0 = getInt32Memory0()[retptr / 4 + 0];
-            var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = new Slice(r0, r1);
-            ;
-            return v1;
-        } finally {
-            wasm.__wbindgen_add_to_stack_pointer(16);
-        }
+        const ret = wasm.sha1hasher_finalize(this.__wbg_ptr);
+        return Memory.__wrap(ret);
     }
 }
 /**
@@ -412,7 +348,6 @@ export class Sha256Hasher {
         ptr = ptr >>> 0;
         const obj = Object.create(Sha256Hasher.prototype);
         obj.__wbg_ptr = ptr;
-        obj.__wbg_freed = false;
 
         return obj;
     }
@@ -424,20 +359,11 @@ export class Sha256Hasher {
         return ptr;
     }
 
-  
-    get freed() {
-        return this.__wbg_freed
-    }
-
     [Symbol.dispose]() {
         this.free()
     }
 
     free() {
-        if (this.__wbg_freed)
-            return
-        this.__wbg_freed = true
-
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_sha256hasher_free(ptr);
     }
@@ -448,28 +374,18 @@ export class Sha256Hasher {
         return Sha256Hasher.__wrap(ret);
     }
     /**
-    * @param {Box<Copiable>} data
+    * @param {Memory} data
     */
     update(data) {
-        const ptr0 = passArray8ToWasm0(data, wasm.__wbindgen_malloc);
-        const len0 = WASM_VECTOR_LEN;
-        wasm.sha256hasher_update(this.__wbg_ptr, ptr0, len0);
+        _assertClass(data, Memory);
+        wasm.sha256hasher_update(this.__wbg_ptr, data.__wbg_ptr);
     }
     /**
-    * @returns {Slice}
+    * @returns {Memory}
     */
     finalize() {
-        try {
-            const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
-            wasm.sha256hasher_finalize(retptr, this.__wbg_ptr);
-            var r0 = getInt32Memory0()[retptr / 4 + 0];
-            var r1 = getInt32Memory0()[retptr / 4 + 1];
-            var v1 = new Slice(r0, r1);
-            ;
-            return v1;
-        } finally {
-            wasm.__wbindgen_add_to_stack_pointer(16);
-        }
+        const ret = wasm.sha256hasher_finalize(this.__wbg_ptr);
+        return Memory.__wrap(ret);
     }
 }
 
@@ -521,7 +437,6 @@ function __wbg_init_memory(imports, maybe_memory) {
 function __wbg_finalize_init(instance, module) {
     wasm = instance.exports;
     __wbg_init.__wbindgen_wasm_module = module;
-    cachedInt32Memory0 = null;
     cachedUint8Memory0 = null;
 
 
@@ -565,58 +480,3 @@ export async function __wbg_init(input) {
 
 export { initSync }
 export default __wbg_init;
-
-
-export class Slice {
-
-  #freed = false
-
-  /**
-   * @param {number} ptr 
-   * @param {number} len 
-   **/
-  constructor(ptr, len) {
-    this.ptr = ptr
-    this.len = len
-    this.start = (ptr >>> 0) / 1
-    this.end = this.start + len
-  }
-
-  /**
-   * @returns {void}
-   **/
-  [Symbol.dispose]() {
-    this.free()
-  }
-
-  /**
-   * @returns {Uint8Array}
-   **/
-  get bytes() {
-    return getUint8Memory0().subarray(this.start, this.end)
-  }
-
-  get freed() {
-    return this.#freed
-  }
-
-  /**
-   * @returns {void}
-   **/
-  free() {
-    if (this.#freed)
-      return
-    this.#freed = true
-    wasm.__wbindgen_free(this.ptr, this.len * 1);
-  }
-
-  /**
-   * @returns {Copied}
-   **/
-  copyAndDispose() {
-    const bytes = this.bytes.slice()
-    this.free()
-    return new Copied(bytes)
-  }
-
-}

@@ -1,8 +1,7 @@
-import { Box, Copied } from "@hazae41/box";
 import { bench, benchSync } from "@hazae41/deimos";
 import { sha1 as nobleSha1 } from '@noble/hashes/sha1';
 import crypto from "crypto";
-import { initBundledOnce, sha1 } from "mods/index.js";
+import { Memory, initBundledOnce, sha1 } from "mods/index.js";
 import { cpus } from "os";
 
 await initBundledOnce()
@@ -10,12 +9,12 @@ await initBundledOnce()
 const samples = 10_000
 
 const data = crypto.getRandomValues(new Uint8Array(1024))
-const box = new Box(new Copied(data))
+const mdata = new Memory(data)
 
 console.log("SHA-1")
 
 const resultWasm = benchSync("Morax", () => {
-  sha1(box).free()
+  sha1(mdata).free()
 }, { samples })
 
 const resultWebCrypto = await bench("WebCrypto", async () => {

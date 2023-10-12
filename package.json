@@ -63,8 +63,5 @@
     "rust",
     "unit-tested",
     "deno"
-  ],
-  "dependencies": {
-    "@hazae41/box": "^1.0.5"
-  }
+  ]
 }
