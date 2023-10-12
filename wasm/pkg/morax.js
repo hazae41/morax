@@ -36,34 +36,6 @@ export function keccak256(data) {
 
 /**
 * @param {Memory} data
-* @returns {number}
-*/
-export function crc32(data) {
-    _assertClass(data, Memory);
-    const ret = wasm.crc32(data.__wbg_ptr);
-    return ret >>> 0;
-}
-
-/**
-* @param {Memory} data
-* @returns {Memory}
-*/
-export function sha1(data) {
-    _assertClass(data, Memory);
-    const ret = wasm.sha1(data.__wbg_ptr);
-    return Memory.__wrap(ret);
-}
-
-let WASM_VECTOR_LEN = 0;
-
-function passArray8ToWasm0(arg, malloc) {
-    const ptr = malloc(arg.length * 1, 1) >>> 0;
-    getUint8Memory0().set(arg, ptr / 1);
-    WASM_VECTOR_LEN = arg.length;
-    return ptr;
-}
-/**
-* @param {Memory} data
 * @returns {Memory}
 */
 export function ripemd160(data) {
@@ -79,6 +51,34 @@ export function ripemd160(data) {
 export function sha256(data) {
     _assertClass(data, Memory);
     const ret = wasm.sha256(data.__wbg_ptr);
+    return Memory.__wrap(ret);
+}
+
+/**
+* @param {Memory} data
+* @returns {number}
+*/
+export function crc32(data) {
+    _assertClass(data, Memory);
+    const ret = wasm.crc32(data.__wbg_ptr);
+    return ret >>> 0;
+}
+
+let WASM_VECTOR_LEN = 0;
+
+function passArray8ToWasm0(arg, malloc) {
+    const ptr = malloc(arg.length * 1, 1) >>> 0;
+    getUint8Memory0().set(arg, ptr / 1);
+    WASM_VECTOR_LEN = arg.length;
+    return ptr;
+}
+/**
+* @param {Memory} data
+* @returns {Memory}
+*/
+export function sha1(data) {
+    _assertClass(data, Memory);
+    const ret = wasm.sha1(data.__wbg_ptr);
     return Memory.__wrap(ret);
 }
 
