@@ -1,7 +1,5 @@
 extern crate alloc;
 
-use alloc::boxed::Box;
-
 use wasm_bindgen::prelude::*;
 
 use crate::Memory;
@@ -17,7 +15,7 @@ pub fn keccak256(data: &Memory) -> Memory {
 
 #[wasm_bindgen]
 pub struct Keccak256Hasher {
-    pub(crate) inner: Box<sha3::Keccak256>,
+    pub(crate) inner: sha3::Keccak256,
 }
 
 #[wasm_bindgen]
@@ -26,8 +24,14 @@ impl Keccak256Hasher {
     pub fn new() -> Self {
         use sha3::Digest;
 
-        let hasher = sha3::Keccak256::new();
-        let inner = Box::new(hasher);
+        let inner = sha3::Keccak256::new();
+
+        Self { inner }
+    }
+
+    #[wasm_bindgen]
+    pub fn clone(&self) -> Self {
+        let inner = self.inner.clone();
 
         Self { inner }
     }

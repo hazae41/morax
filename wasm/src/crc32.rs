@@ -1,7 +1,5 @@
 extern crate alloc;
 
-use alloc::boxed::Box;
-
 use wasm_bindgen::prelude::*;
 
 use crate::Memory;
@@ -15,15 +13,21 @@ pub fn crc32(data: &Memory) -> u32 {
 
 #[wasm_bindgen]
 pub struct Crc32Hasher {
-    pub(crate) inner: Box<crc32fast::Hasher>,
+    pub(crate) inner: crc32fast::Hasher,
 }
 
 #[wasm_bindgen]
 impl Crc32Hasher {
     #[wasm_bindgen(constructor)]
     pub fn new() -> Self {
-        let hasher = crc32fast::Hasher::new();
-        let inner = Box::new(hasher);
+        let inner = crc32fast::Hasher::new();
+
+        Self { inner }
+    }
+
+    #[wasm_bindgen]
+    pub fn clone(&self) -> Self {
+        let inner = self.inner.clone();
 
         Self { inner }
     }

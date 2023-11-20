@@ -1,7 +1,5 @@
 extern crate alloc;
 
-use alloc::boxed::Box;
-
 use wasm_bindgen::prelude::*;
 
 use crate::Memory;
@@ -17,7 +15,7 @@ pub fn ripemd160(data: &Memory) -> Memory {
 
 #[wasm_bindgen]
 pub struct Ripemd160Hasher {
-    pub(crate) inner: Box<ripemd::Ripemd160>,
+    pub(crate) inner: ripemd::Ripemd160,
 }
 
 #[wasm_bindgen]
@@ -26,8 +24,14 @@ impl Ripemd160Hasher {
     pub fn new() -> Self {
         use ripemd::Digest;
 
-        let hasher = ripemd::Ripemd160::new();
-        let inner = Box::new(hasher);
+        let inner = ripemd::Ripemd160::new();
+
+        Self { inner }
+    }
+
+    #[wasm_bindgen]
+    pub fn clone(&self) -> Self {
+        let inner = self.inner.clone();
 
         Self { inner }
     }

@@ -1,7 +1,5 @@
 extern crate alloc;
 
-use alloc::boxed::Box;
-
 use wasm_bindgen::prelude::*;
 
 use crate::Memory;
@@ -17,7 +15,7 @@ pub fn sha256(data: &Memory) -> Memory {
 
 #[wasm_bindgen]
 pub struct Sha256Hasher {
-    pub(crate) inner: Box<sha2::Sha256>,
+    pub(crate) inner: sha2::Sha256,
 }
 
 #[wasm_bindgen]
@@ -26,8 +24,14 @@ impl Sha256Hasher {
     pub fn new() -> Self {
         use sha2::Digest;
 
-        let hasher = sha2::Sha256::new();
-        let inner = Box::new(hasher);
+        let inner = sha2::Sha256::new();
+
+        Self { inner }
+    }
+
+    #[wasm_bindgen]
+    pub fn clone(&self) -> Self {
+        let inner = self.inner.clone();
 
         Self { inner }
     }
