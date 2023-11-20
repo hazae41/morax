@@ -34,6 +34,10 @@ export class Crc32Hasher {
 */
   constructor();
 /**
+* @returns {Crc32Hasher}
+*/
+  clone(): Crc32Hasher;
+/**
 * @param {Memory} data
 */
   update(data: Memory): void;
@@ -50,6 +54,10 @@ export class Keccak256Hasher {
 /**
 */
   constructor();
+/**
+* @returns {Keccak256Hasher}
+*/
+  clone(): Keccak256Hasher;
 /**
 * @param {Memory} data
 */
@@ -101,6 +109,10 @@ export class Ripemd160Hasher {
 */
   constructor();
 /**
+* @returns {Ripemd160Hasher}
+*/
+  clone(): Ripemd160Hasher;
+/**
 * @param {Memory} data
 */
   update(data: Memory): void;
@@ -117,6 +129,10 @@ export class Sha1Hasher {
 /**
 */
   constructor();
+/**
+* @returns {Sha1Hasher}
+*/
+  clone(): Sha1Hasher;
 /**
 * @param {Memory} data
 */
@@ -135,6 +151,10 @@ export class Sha256Hasher {
 */
   constructor();
 /**
+* @returns {Sha256Hasher}
+*/
+  clone(): Sha256Hasher;
+/**
 * @param {Memory} data
 */
   update(data: Memory): void;
@@ -150,19 +170,23 @@ export interface InitOutput {
   readonly memory: WebAssembly.Memory;
   readonly keccak256: (a: number) => number;
   readonly keccak256hasher_new: () => number;
+  readonly keccak256hasher_clone: (a: number) => number;
   readonly keccak256hasher_update: (a: number, b: number) => void;
   readonly keccak256hasher_finalize: (a: number) => number;
   readonly ripemd160: (a: number) => number;
   readonly ripemd160hasher_new: () => number;
+  readonly ripemd160hasher_clone: (a: number) => number;
   readonly ripemd160hasher_update: (a: number, b: number) => void;
   readonly ripemd160hasher_finalize: (a: number) => number;
   readonly sha256: (a: number) => number;
   readonly sha256hasher_new: () => number;
+  readonly sha256hasher_clone: (a: number) => number;
   readonly sha256hasher_update: (a: number, b: number) => void;
   readonly sha256hasher_finalize: (a: number) => number;
   readonly crc32: (a: number) => number;
   readonly __wbg_crc32hasher_free: (a: number) => void;
   readonly crc32hasher_new: () => number;
+  readonly crc32hasher_clone: (a: number) => number;
   readonly crc32hasher_update: (a: number, b: number) => void;
   readonly crc32hasher_finalize: (a: number) => number;
   readonly __wbg_memory_free: (a: number) => void;
@@ -173,6 +197,7 @@ export interface InitOutput {
   readonly sha1hasher_new: () => number;
   readonly sha1hasher_update: (a: number, b: number) => void;
   readonly sha1hasher_finalize: (a: number) => number;
+  readonly sha1hasher_clone: (a: number) => number;
   readonly __wbg_ripemd160hasher_free: (a: number) => void;
   readonly __wbg_sha256hasher_free: (a: number) => void;
   readonly __wbg_keccak256hasher_free: (a: number) => void;

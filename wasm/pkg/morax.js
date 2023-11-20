@@ -116,6 +116,13 @@ export class Crc32Hasher {
         return Crc32Hasher.__wrap(ret);
     }
     /**
+    * @returns {Crc32Hasher}
+    */
+    clone() {
+        const ret = wasm.crc32hasher_clone(this.__wbg_ptr);
+        return Crc32Hasher.__wrap(ret);
+    }
+    /**
     * @param {Memory} data
     */
     update(data) {
@@ -161,6 +168,13 @@ export class Keccak256Hasher {
     */
     constructor() {
         const ret = wasm.keccak256hasher_new();
+        return Keccak256Hasher.__wrap(ret);
+    }
+    /**
+    * @returns {Keccak256Hasher}
+    */
+    clone() {
+        const ret = wasm.keccak256hasher_clone(this.__wbg_ptr);
         return Keccak256Hasher.__wrap(ret);
     }
     /**
@@ -278,6 +292,13 @@ export class Ripemd160Hasher {
         return Ripemd160Hasher.__wrap(ret);
     }
     /**
+    * @returns {Ripemd160Hasher}
+    */
+    clone() {
+        const ret = wasm.ripemd160hasher_clone(this.__wbg_ptr);
+        return Ripemd160Hasher.__wrap(ret);
+    }
+    /**
     * @param {Memory} data
     */
     update(data) {
@@ -326,6 +347,13 @@ export class Sha1Hasher {
         return Sha1Hasher.__wrap(ret);
     }
     /**
+    * @returns {Sha1Hasher}
+    */
+    clone() {
+        const ret = wasm.ripemd160hasher_clone(this.__wbg_ptr);
+        return Sha1Hasher.__wrap(ret);
+    }
+    /**
     * @param {Memory} data
     */
     update(data) {
@@ -371,6 +399,13 @@ export class Sha256Hasher {
     */
     constructor() {
         const ret = wasm.sha256hasher_new();
+        return Sha256Hasher.__wrap(ret);
+    }
+    /**
+    * @returns {Sha256Hasher}
+    */
+    clone() {
+        const ret = wasm.sha256hasher_clone(this.__wbg_ptr);
         return Sha256Hasher.__wrap(ret);
     }
     /**
