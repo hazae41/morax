@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@hazae41/morax",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "WebAssembly port of SHA-1, SHA-256, Keccak-256, RIPEMD-160, and CRC-32 hashing algorithms",
   "homepage": "https://github.com/hazae41/morax",
   "repository": "github:hazae41/morax",
